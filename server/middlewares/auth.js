@@ -6,16 +6,9 @@ exports.requireAuth = expressJwt({
    requestProperty : 'auth'
 })
 
-// Is Auth
-exports.isAuth = (req,res,next) => {
-  const user = req.profile && req.auth && req.profile._id == req.auth._id;
-  if(!user){
-    return res.status(401).json({ error : 'Not Authorized'})
-  }
-  next();
-}
+
 //Is Admin
-exports.isAdmin = (req,res) => {
+exports.isAdmin = (req,res,next) => {
   if(req.profile.role === 'User'){
     return res.status(401).json({ error : 'Admin only'})
   }

@@ -10,7 +10,7 @@ require('dotenv').config();
 
 //Routes
  const userRoutes = require('./server/routes/user');
-
+ const categoryRoutes = require('./server/routes/category');
 //mongodb connection
 mongoose.connect(process.env.MONGOURI,{
   useNewUrlParser : true,
@@ -23,12 +23,13 @@ mongoose.connect(process.env.MONGOURI,{
 //Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended  : true }));
+app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(cors());
-app.use(cookieParser());
 
 //Routes Middleware
 app.use('/api',userRoutes);
+app.use('/api',categoryRoutes);
 
 //server
 const port = process.env.PORT;
