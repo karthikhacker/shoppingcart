@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const chalk = require('chalk');
@@ -13,7 +14,8 @@ require('dotenv').config();
 //mongodb connection
 mongoose.connect(process.env.MONGOURI,{
   useNewUrlParser : true,
-  useUnifiedTopology : true
+  useUnifiedTopology : true,
+  useCreateIndex : true
 }).then(() => {
    console.log(chalk.yellow('MONGODB CONNECTED !'))
 })
@@ -23,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(morgan('dev'));
 app.use(cors());
+app.use(cookieParser());
 
 //Routes Middleware
 app.use('/api',userRoutes);
