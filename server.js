@@ -11,6 +11,8 @@ require('dotenv').config();
 //Routes
  const userRoutes = require('./server/routes/user');
  const categoryRoutes = require('./server/routes/category');
+ const productRoutes = require('./server/routes/product');
+
 //mongodb connection
 mongoose.connect(process.env.MONGOURI,{
   useNewUrlParser : true,
@@ -30,7 +32,8 @@ app.use(cors());
 //Routes Middleware
 app.use('/api',userRoutes);
 app.use('/api',categoryRoutes);
-
+app.use('/api',productRoutes);
+app.use('/uploads',express.static('uploads'));
 //server
 const port = process.env.PORT;
 app.listen(port, () => {

@@ -25,10 +25,17 @@ const userSchema = new  mongoose.Schema({
       required : 'Password is required',
       minlength : [6,'Password should be minimun 6 character']
    },
+   about : {
+      type : String
+   },
    role : {
      type : String,
      enum : ['Admin','User'],
      default : 'User'
+   },
+   history : {
+     type : Array,
+     default : []
    }
 })
 userSchema.plugin(uniqueValidator);

@@ -8,7 +8,7 @@ exports.signup = (req,res) => {
      if(err){
        return res.status(400).json({ error : getErrorMessage(err) })
      }
-     res.status(200).json(user);
+     res.status(200).json({ message : 'Account created',user});
   })
 }
 // user by id
