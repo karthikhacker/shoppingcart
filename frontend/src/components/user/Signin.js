@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import {API} from '../../config';
+import {authenticate,isAuthenticated} from '../auth';
 
 const Signin = () => {
    const [values,setValues] = useState({
@@ -12,6 +13,7 @@ const Signin = () => {
       loading : false
    })
    const { email, password, error , loading ,redirectTo } = values;
+   const { user } = isAuthenticated();
    //handleChange
    const handleChange = name => event => {
      setValues({...values, error : false, [name] : event.target.value})
@@ -22,12 +24,9 @@ const Signin = () => {
      setValues({ ...values, error : false, loading : true})
      const data = {email,password};
      axios.post(`${API}/signin`,data).then(res => {
-        console.log(res.data)
+        console.log(res.data.user.name)
         //set token to localStorage
-        const { token } = res.data;
-        if(typeof window !== 'undefined'){
-          localStorage.setItem('jwt',JSON.stringify(token))
-        }
+         authenticate(res.data)
         setValues({
            ...values,
            loading : false,
@@ -69,7 +68,14 @@ const Signin = () => {
    }
    const redirectUser = () => {
      if(redirectTo){
-       return <Redirect to="/" />
+       if(user && user.role === 'Admin'){
+          return <Redirect to="/admin/dashboard"/>
+       }else{
+         return <Redirect to="/user/dashboard" />
+       }
+     }
+     if(isAuthenticated()){
+       return <Redirect to="/"/>
      }
    }
   return(

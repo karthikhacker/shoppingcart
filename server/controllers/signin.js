@@ -12,7 +12,7 @@ exports.signin = (req,res) => {
          return res.status(400).json({ error : 'oops password didnt match '})
        }else{
          const token = jwt.sign({
-           id : user._id,
+           _id : user._id,
            email : user.email,
            name : user.name,
            role : user.role

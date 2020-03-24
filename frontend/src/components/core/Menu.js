@@ -6,6 +6,7 @@ import {API} from '../../config';
 import { Link } from 'react-router-dom';
 
 const Menu = ({history}) => {
+  const { user } = isAuthenticated();
   //logout
   const logout = () => {
     if(typeof window !== 'undefined'){
@@ -29,9 +30,23 @@ const Menu = ({history}) => {
               <li><Link to="/signin">Signin</Link></li>
            </ul>
          )}
+         {
+           isAuthenticated() && isAuthenticated().user.role === 'User' && (
+             <ul className="nav navbar-nav navbar-right">
+              <li><Link to="/user/dashboard">User dashboard</Link></li>
+             </ul>
+           )
+         }
+         {
+            isAuthenticated() && isAuthenticated().user.role === 'Admin' && (
+              <ul className="nav navbar-nav navbar-right">
+               <li><Link to="/admin/dashboard">Admin dashboard</Link></li>
+              </ul>
+            )
+         }
          {isAuthenticated() && (
            <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/userdashboard">Dashboard</Link></li>
+              <li><a>Hi, {user.name} <span className="label label-info">{user.role === 'Admin' ? 'Admin' : ''}</span></a></li>
               <li><a style={{cursor : 'pointer'}} onClick={logout}>Logout</a></li>
            </ul>
          )}

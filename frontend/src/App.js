@@ -7,7 +7,10 @@ import Home from './components/core/Home';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import UserDashboard from './components/user/UserDashboard';
+import AdminDashboard from './components/user/AdminDashboard';
 import PrivateRoute from './components/auth/PrivateRoute';
+import AdminRoute from './components/auth/AdminRoute';
+
 
 function App() {
   return (
@@ -18,7 +21,8 @@ function App() {
           <Route exact path="/" component={Home}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/signin" component={Signin}/>
-          <PrivateRoute exact path="/userdashboard" component={UserDashboard}/>
+          <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
+          <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
         </Switch>
       </div>
     </Router>
