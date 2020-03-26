@@ -13,20 +13,21 @@ exports.signin = (req,res) => {
        }else{
          const token = jwt.sign({
            _id : user._id,
-           email : user.email,
-           name : user.name,
-           role : user.role
+           email : user.email
          },process.env.JWT_SECRET);
-         res.cookie("t", token, {
-             expire: new Date() + 9999
-         })
-         res.status(200).json({ token : 'Bearer ' + token, user })
+         res.status(200).json({ token :  token, user })
        }
      }
   })
 }
-//Signout
-exports.signout = (req, res) => {
-    res.clearCookie('t');
-    res.json({ message: 'Signout success' });
-};
+//current user
+exports.user = (req,res) => {
+  User.findById(req.user._id)
+   .select('-password')
+   .exec((err,user) => {
+     if(err){
+       return res.status(400).json({ error : 'User not found' })
+     }
+     res.status(200).json(user)
+   })
+}

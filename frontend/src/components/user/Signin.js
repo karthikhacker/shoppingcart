@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import {API} from '../../config';
 import {authenticate,isAuthenticated} from '../auth';
+import setAuthToken from '../utils/setAuthToken';
 
 const Signin = () => {
    const [values,setValues] = useState({
@@ -27,6 +28,8 @@ const Signin = () => {
         console.log(res.data.user.name)
         //set token to localStorage
          authenticate(res.data)
+         //set auth token
+         setAuthToken(res.data)
         setValues({
            ...values,
            loading : false,

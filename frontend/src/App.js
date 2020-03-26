@@ -10,6 +10,7 @@ import UserDashboard from './components/user/UserDashboard';
 import AdminDashboard from './components/user/AdminDashboard';
 import PrivateRoute from './components/auth/PrivateRoute';
 import AdminRoute from './components/auth/AdminRoute';
+import AddCategory from './components/admin/AddCategory';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/signin" component={Signin}/>
           <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+          <AdminRoute exact path="/create/category" component={AddCategory}/>
         </Switch>
       </div>
     </Router>
