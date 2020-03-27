@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const morgan = require('morgan');
 const cors = require('cors');
 const chalk = require('chalk');
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(morgan('dev'));
 app.use(cors());
+require('./server/middlewares/passport')(passport);
 //Routes Middleware
 app.use('/api',userRoutes);
 app.use('/api',categoryRoutes);

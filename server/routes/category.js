@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+
 const  {create } = require('../controllers/category');
 
-const { requireAuth, isAdmin }  = require('../middlewares/auth');
 
-router.post('/create/category', requireAuth, isAdmin, create);
+router.post('/create/category', passport.authenticate('jwt',{session : false }),  create);
 
 module.exports = router;

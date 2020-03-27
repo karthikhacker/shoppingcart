@@ -1,14 +1,14 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
 const { signup } = require('../controllers/user');
-const { signin,user } = require('../controllers/signin');
+const { signin, currentUser } = require('../controllers/signin');
 
 //auth middleware
-const { requireAuth } = require('../middlewares/auth');
 //routes
 router.post('/signup',signup);
 router.post('/signin',signin);
-router.get('/user', requireAuth, user)
+router.get('/user', passport.authenticate('jwt',{session : false}),  currentUser)
 
 module.exports = router;

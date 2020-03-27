@@ -12,22 +12,19 @@ exports.signin = (req,res) => {
          return res.status(400).json({ error : 'oops password didnt match '})
        }else{
          const token = jwt.sign({
-           _id : user._id,
+           id : user.id,
            email : user.email
          },process.env.JWT_SECRET);
-         res.status(200).json({ token :  token, user })
+         res.status(200).json({ token : 'Bearer ' +  token, user })
        }
      }
   })
 }
 //current user
-exports.user = (req,res) => {
-  User.findById(req.user._id)
-   .select('-password')
-   .exec((err,user) => {
-     if(err){
-       return res.status(400).json({ error : 'User not found' })
-     }
-     res.status(200).json(user)
-   })
+exports.currentUser = (req,res) => {
+  return res.json({
+     id : req.user._id,
+     email : req.user.email,
+     role : req.user.role
+  })
 }
