@@ -13,7 +13,9 @@ exports.signin = (req,res) => {
        }else{
          const token = jwt.sign({
            id : user.id,
-           email : user.email
+           name : user.name,
+           email : user.email,
+           role : user.role
          },process.env.JWT_SECRET);
          res.status(200).json({ token : 'Bearer ' +  token, user })
        }
@@ -24,6 +26,7 @@ exports.signin = (req,res) => {
 exports.currentUser = (req,res) => {
   return res.json({
      id : req.user._id,
+     name : req.user.name,
      email : req.user.email,
      role : req.user.role
   })
