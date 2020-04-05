@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
@@ -141,6 +142,15 @@ class CreateProduct extends React.Component{
         quantity
       }
       this.props.createProduct(data);
+      this.setState({
+         name : '',
+         category : '',
+         price : '',
+         description : '',
+         productImage : [],
+         stock : '',
+         quantity : ''
+      })
     }
   }
   //form
@@ -194,10 +204,19 @@ class CreateProduct extends React.Component{
                <label>Quantity</label>
                <input onChange={this.handleQuantity} value={this.state.quantity} type="text" className="form-control" placeholder="Quantity"/>
              </div>
-             <button className="btn btn-success btn-sm">Submit</button>
+             <button className="btn btn-success btn-sm">{this.showLoading()}</button>
           </div>
         </div>
       </form>
+    )
+  }
+  //show loading
+  showLoading = () => {
+    const { loading } = this.props.product;
+    return(
+      <div>
+        {loading ? '...Loading' : 'Submit'}
+      </div>
     )
   }
   // show error
@@ -214,7 +233,7 @@ class CreateProduct extends React.Component{
     const { product } = this.props.product;
     return(
       <div>
-       {product.name ? <p className="text-center text-success">{product.name} created.</p> : ''}
+       {product.name ? <p className="alert alert-success text-center">{product.name} created.</p> : ''}
       </div>
     )
   }
@@ -231,6 +250,9 @@ class CreateProduct extends React.Component{
               {this.showError()}
               {this.showSuccess()}
               {this.form()}
+              <br />
+              <br />
+              <Link to="/admin/dashboard" className="btn btn-default">Go back</Link>
             </div>
           </div>
         </div>
