@@ -1,4 +1,4 @@
-import { CATEGORY_SUCCESS,CATEGORY_ERROR,CATEGORY_LOADING, AUTH_ERROR, USER_LOADING, SET_CURRENT_USER, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_PROFILE_ERROR } from './types';
+import { ADD_PRODUCT, PRODUCT_LOADING, PRODUCT_ERROR, CATEGORY_SUCCESS,CATEGORY_ERROR,CATEGORY_LOADING, AUTH_ERROR, USER_LOADING, SET_CURRENT_USER, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_PROFILE_ERROR } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
@@ -88,5 +88,26 @@ export const addCategory = (data) => {
 export const categoryLoading = () => {
   return{
     type : CATEGORY_LOADING
+  }
+}
+// add product
+export const createProduct = (data) => {
+  return dispatch => {
+    dispatch(productLoading())
+    axios.post('http://localhost:4000/api/create/product',data)
+     .then(res => dispatch({
+       type : ADD_PRODUCT,
+       payload : res.data
+     }))
+     .catch(error => dispatch({
+       type : PRODUCT_ERROR,
+       payload : error.response.data
+     }))
+  }
+}
+// product loading
+export const productLoading = () => {
+  return{
+    type : PRODUCT_LOADING
   }
 }
