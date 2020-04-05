@@ -48,3 +48,28 @@ exports.createProduct = (req,res) => {
      res.status(200).json(product);
   })
 }
+// Product by id
+exports.productById = (req,res,next,id) => {
+  Product.findById(id)
+   .exec((err,product) => {
+     if(err || !product){
+       return res.status(400).json({ error : 'Product not found'})
+     }
+     req.product = product;
+     next();
+   })
+}
+// Read signle product
+exports.read = (req,res) => {
+  return res.status(200).json(req.product);
+}
+// Remove
+exports.remove = (req,res) => {
+  let product = req.product;
+  product.remove((err) => {
+    if(err){
+      return res.status(400).json({ error : getErrorMessage(err)})
+    }
+    res.status(200).json({ msg : 'Product deleted' })
+  })
+}
