@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const _ = require('lodash');
 const multer = require('multer');
 const getErrorMessage = require('../helpers/errorHandler');
 
@@ -72,4 +73,17 @@ exports.remove = (req,res) => {
     }
     res.status(200).json({ msg : 'Product deleted' })
   })
+}
+// Update
+exports.update = (req,res) => {
+   const { name, productImage, price, category, description, stock, quantity, sold } = req.body;
+   const fields = {name,productImage,price,category,description,stock,quantity,sold};
+   let product = req.product;
+   product = _.extend(product,fields)
+   product.save((err,product) => {
+     if(err){
+       return res.status(400).json({ error : getErrorMessage(err)})
+     }
+     res.status(200).json(product);
+   })
 }
