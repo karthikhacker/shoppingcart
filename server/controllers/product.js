@@ -32,7 +32,7 @@ exports.productImageUpload = (req,res) => {
     }else{
       const reqFiles = [];
       for(let i = 0; i < req.files.length; i++){
-        reqFiles.push(req.files[i].filename)
+        reqFiles.push(req.files[i].path)
       }
       res.json({ images : reqFiles })
     }
@@ -87,20 +87,28 @@ exports.update = (req,res) => {
      res.status(200).json(product);
    })
 }
-// get products based on ell and arrival
-exports.list = (req,res) => {
-  let order = req.query.order ?  req.query.order : 'asc';
-  let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
-  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
-  Product.find()
-   .populate('category')
-   .sort([[ sortBy, order ]])
-   .limit(limit)
-   .exec((err,product) => {
-     if(err){
-       return res.status(400).json({ error : getErrorMessage(err) })
-     }
-     res.status(200).json(product);
+// get products based on sell
+exports.listBySell = (req,res) => {
+  Product.find({})
+   .sort('-sold')
+   .limit(6)
+   .exec((err,products) => {
+      if(err || !products){
+        return res.status(400).json({ error : 'No products' })
+      }
+      res.status(200).json(products);
+   })
+}
+//get product based on arrival
+exports.listLatest = (req,res) => {
+  Product.find({})
+   .sort('-createdAt')
+   .limit(6)
+   .exec((err,products) => {
+      if(err || !products){
+        return res.status(400).json({ error : 'No products'})
+      }
+      res.status(200).json(products);
    })
 }
 // list related

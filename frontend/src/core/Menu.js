@@ -18,7 +18,9 @@ import { logoutUser } from '../actions';
            <div className="navbar-header">
              <Link to="/" className="navbar-brand">Shopify</Link>
            </div>
-
+           <ul className="nav navbar-nav navbar-left">
+            <li><Link to="/shop">Shop</Link></li>
+           </ul>
            {isAuthenticated && (
              <ul className="nav navbar-nav navbar-right">
                <li><a style={{cursor : 'pointer'}} onClick={this.onLogout}>Logout</a></li>

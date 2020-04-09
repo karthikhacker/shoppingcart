@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
      type : Number,
      default : 0
    }
-})
+},{timestamps : true})
 productSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Product',productSchema);
