@@ -131,6 +131,7 @@ exports.listBySearch = (req,res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
   let findArgs = {};
+  //console.log(req.body.filters);
   for(let key in req.body.filters){
      if(req.body.filters[key].length > 0){
        if(key === 'price'){
@@ -143,6 +144,7 @@ exports.listBySearch = (req,res) => {
        }
      }
   }
+  console.log(findArgs)
   Product.find(findArgs)
    .populate('category')
    .sort([[ sortBy, order ]])
