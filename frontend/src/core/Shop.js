@@ -11,13 +11,21 @@ class Shop extends React.Component{
     categories : [],
     loading : false,
     error : {},
+    skip : 0,
+    size : 0,
+    limit : 6,
     myFilters : {
       category : [],
       price : []
-    },
-    skip : 0,
-    limit : 6
+    }
   }
+  //Lifecycle method
+  componentDidMount(){
+    this.getCategories();
+
+    this.getProducts()
+  }
+
   //get categories
   getCategories = () => {
     this.setState({ loading : true })
@@ -37,22 +45,38 @@ class Shop extends React.Component{
        })
      })
   }
+
   //get products
+
   getProducts = (variables) => {
+    //console.log(data)
     axios.post('http://localhost:4000/api/products/by/search',variables)
      .then(res => {
-       console.log(res.data);
-        this.setState({ products : res.data.product })
+       //console.log(res.data.size);
+        this.setState({...this.state.products, products : res.data.product, size : res.data.size })
      })
      .catch(error => {
        console.log(error);
      })
   }
-  //Lifecycle method
-  componentDidMount(){
-    this.getCategories();
-    this.getProducts()
+  // Load more
+  loadMore = () => {
+    this.setState({
+      limit : this.state.limit + 4
+    })
   }
+   //load more button
+   loadMoreButton = () => {
+        return (
+            this.state.limit <
+            this.state.products.length && (
+                <button onClick={this.loadMore} className="btn btn-warning btn-sm">
+                    Load more
+                </button>
+            )
+        );
+    };
+
   //showFilterResults
   showFilterResults = (filters) => {
    const variables = {
@@ -81,13 +105,13 @@ class Shop extends React.Component{
          array = data[key].array;
       }
     }
-    console.log('array',array);
+    //console.log('array',array);
     return array;
   }
   // load filter results
 
   render(){
-  //  console.log(this.state.products);
+   //console.log(this.state.size);
     return(
        <div className="section">
          <div className="jumbotron">
@@ -105,11 +129,12 @@ class Shop extends React.Component{
                 <h3 className="text-center">Products</h3>
                 <div className="row">
                   {
-                    this.state.products.length > 0 ? this.state.products.map((product) => (
+                    this.state.products.length > 0 ? this.state.products.slice(0,this.state.limit).map((product) => (
                       <Card product={product} key={product._id}/>
                     )) : <p className="text-center lead">No products</p>
                   }
                 </div>
+                {this.loadMoreButton()}
              </div>
            </div>
          </div>

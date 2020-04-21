@@ -91,7 +91,7 @@ exports.update = (req,res) => {
 exports.listBySell = (req,res) => {
   Product.find({})
    .sort('-sold')
-   .limit(6)
+   .limit(4)
    .exec((err,products) => {
       if(err || !products){
         return res.status(400).json({ error : 'No products' })
@@ -103,7 +103,7 @@ exports.listBySell = (req,res) => {
 exports.listLatest = (req,res) => {
   Product.find({})
    .sort('-createdAt')
-   .limit(6)
+   .limit(4)
    .exec((err,products) => {
       if(err || !products){
         return res.status(400).json({ error : 'No products'})
@@ -113,7 +113,7 @@ exports.listLatest = (req,res) => {
 }
 // list related
 exports.listRelated = (req,res) => {
-  const limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  const limit = req.query.limit ? parseInt(req.query.limit) : 4;
   Product.find({ _id : {$ne : req.product}, categoey : req.product.category })
    .limit(limit)
    .populate('category','_id, name')
@@ -126,7 +126,7 @@ exports.listRelated = (req,res) => {
 }
 //List by search
 exports.listBySearch = (req,res) => {
-  let order = req.body.filter ? req.body.filter : "desc";
+  let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
@@ -144,12 +144,12 @@ exports.listBySearch = (req,res) => {
        }
      }
   }
-  console.log(findArgs)
+  //console.log(findArgs)
   Product.find(findArgs)
    .populate('category')
    .sort([[ sortBy, order ]])
-   .limit(limit)
    .skip(skip)
+   .limit(limit)
    .exec((err,product) => {
      if(err){
        return res.status(400).json({ error : getErrorMessage(err) })
