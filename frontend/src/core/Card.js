@@ -11,7 +11,7 @@ const Card = ({product}) => {
           <h3>{product.name}</h3>
           <p>{product.price ? <span>$ {product.price}</span> : ''}</p>
           <p>
-           <span><Link className="btn btn-warning btn-sm" to={`/product/details/${product._id}`}>View product</Link></span>
+           <span><Link className="btn btn-warning btn-sm" to={`/product/${product._id}`}>View product</Link></span>
            <span><button className="btn btn-info btn-sm">Add to cart</button></span>
           </p>
         </div>

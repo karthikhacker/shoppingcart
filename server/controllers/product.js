@@ -52,6 +52,7 @@ exports.createProduct = (req,res) => {
 // Product by id
 exports.productById = (req,res,next,id) => {
   Product.findById(id)
+  .populate('category')
    .exec((err,product) => {
      if(err || !product){
        return res.status(400).json({ error : 'Product not found'})
@@ -131,6 +132,7 @@ exports.listBySearch = (req,res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
   let findArgs = {};
+  let term = req.body.searchTerm;
   //console.log(req.body.filters);
   for(let key in req.body.filters){
      if(req.body.filters[key].length > 0){
@@ -145,15 +147,26 @@ exports.listBySearch = (req,res) => {
      }
   }
   //console.log(findArgs)
-  Product.find(findArgs)
-   .populate('category')
-   .sort([[ sortBy, order ]])
-   .skip(skip)
-   .limit(limit)
-   .exec((err,product) => {
+   Product.find(findArgs)
+     .populate('category')
+     .sort([[ sortBy, order ]])
+     .skip(skip)
+     .limit(limit)
+     .exec((err,product) => {
+       if(err){
+         return res.status(400).json({ error : getErrorMessage(err) })
+       }
+       res.status(200).json({ size : product.length, product});
+     })
+
+
+}
+exports.productList = (req,res) => {
+  Product.find()
+   .exec((err,products) => {
      if(err){
-       return res.status(400).json({ error : getErrorMessage(err) })
+       res.status(400).json({ error : 'Product not found'})
      }
-     res.status(200).json({ size : product.length, product});
+     res.status(200).json(products);
    })
 }

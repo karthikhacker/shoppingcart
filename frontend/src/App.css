@@ -7,3 +7,16 @@
 .thumbnail span{
    margin: 10px;
 }
+.navbar .navbar-brand {
+  color:bdc3c7;
+}
+.navbar .navbar-brand:hover{
+  color: #16a085;
+}
+.search-img{
+  width :50px;
+  margin-right: 15px;
+}
+.search-link:hover{
+  text-decoration: none;
+}

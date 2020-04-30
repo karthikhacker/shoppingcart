@@ -114,9 +114,6 @@ class Shop extends React.Component{
    //console.log(this.state.size);
     return(
        <div className="section">
-         <div className="jumbotron">
-            <input type="text" className="form-control"/>
-         </div>
          <div className="container-fluid">
            <div className="row">
              <div className="col-sm-3">

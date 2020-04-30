@@ -3,16 +3,15 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 const ImageCarousel = ({product}) => {
-  const {productImage} = product;
-  //console.log(productImage)
+  console.log(product.productImage)
   return(
      <Carousel
      showThumbs={false}
       autoPlay={true}
      >
-       {product.productImage.map((img,index) => (
+       {product.productImage.length > 0 ? product.productImage.map((img,index) => (
          <img src={`http://localhost:4000/${img}`} key={index} style={{ width : '100%'}}/>
-       ))}
+       )) : null }
      </Carousel>
   )
 }

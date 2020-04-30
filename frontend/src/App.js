@@ -10,6 +10,7 @@ import UserDashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
 import CreateCategory from './admin/CreateCategory';
 import CreateProduct from './admin/CreateProduct';
+import Product from './core/Product';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -41,6 +42,7 @@ class  App extends React.Component {
                <Route exact path="/" component={Home}/>
                <Route exact path="/signin" component={Signin}/>
                <Route exact path="/shop" component={Shop}/>
+               <Route exact path="/product/:productId" component={Product}/>
                <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
                <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
                <AdminRoute exact path="/create/category" component={CreateCategory}/>
