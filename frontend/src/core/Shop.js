@@ -127,7 +127,9 @@ class Shop extends React.Component{
                 <div className="row">
                   {
                     this.state.products.length > 0 ? this.state.products.slice(0,this.state.limit).map((product) => (
-                      <Card product={product} key={product._id}/>
+                      <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
+                       <Card product={product} key={product._id}/>
+                      </div>
                     )) : <p className="text-center lead">No products</p>
                   }
                 </div>

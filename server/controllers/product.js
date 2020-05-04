@@ -114,8 +114,8 @@ exports.listLatest = (req,res) => {
 }
 // list related
 exports.listRelated = (req,res) => {
-  const limit = req.query.limit ? parseInt(req.query.limit) : 4;
-  Product.find({ _id : {$ne : req.product}, categoey : req.product.category })
+  const limit = req.query.limit ? parseInt(req.query.limit) : 100;
+  Product.find({ _id : {$ne : req.product}, category : req.product.category })
    .limit(limit)
    .populate('category','_id, name')
    .exec((err,product) => {

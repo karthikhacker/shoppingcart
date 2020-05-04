@@ -107,7 +107,9 @@ class Home extends React.Component{
             </div>
             <div className="row">
               {this.state.productByArrival.map((product) => (
-                <Card key={product._id} product={product}/>
+                <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
+                 <Card key={product._id} product={product}/>
+                </div>
               ))}
             </div>
           </div>
@@ -117,7 +119,9 @@ class Home extends React.Component{
             </div>
              <div className="row">
               {this.state.productBySell.map((product) => (
-                <Card key={product._id} product={product}/>
+                <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
+                 <Card key={product._id} product={product}/>
+                </div>
               ))}
              </div>
           </div>
