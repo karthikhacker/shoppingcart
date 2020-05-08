@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import queryString from "query-string";
+
 
 class Search extends React.Component{
   state = {

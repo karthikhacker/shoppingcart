@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from './Layout';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card';
@@ -69,7 +70,7 @@ class Home extends React.Component{
     this.setState({ searchTerms : newSearchTerm })
     //console.log(newSearchTerm);
     const queryData = [];
-     if(newSearchTerm != ''){
+     if(newSearchTerm !== ''){
        this.state.products.forEach(function(product){
          if(product.name.toLowerCase().indexOf(newSearchTerm) !== -1){
            if(queryData.length < 10){
@@ -85,6 +86,7 @@ class Home extends React.Component{
     console.log(this.state.visibleProducts);
     return(
        <div className="section">
+          <Layout />
           <div className="jumbotron">
             <div className="container">
                <Search updateSearch={this.handleUpdate}/>

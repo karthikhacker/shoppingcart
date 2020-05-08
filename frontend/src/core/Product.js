@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import Layout from './Layout';
 import axios from 'axios';
 import ImageCarousel from './ImageCarousel';
 import Card from './Card';
@@ -7,6 +8,7 @@ const Product = (props) => {
   const [product,setProduct] = useState({});
   const [error, setError] = useState(false);
   const [similarProduct,setSimilarProduct] = useState([]);
+  const [redirect,setRedirect] = useState(false);
 
   //loadProduct
   const loadProduct = (productId) => {
@@ -27,8 +29,10 @@ const Product = (props) => {
   useEffect(() => {
     loadProduct(props.match.params.productId)
   },[props]);
+
   return(
     <div className="section">
+       <Layout />
        <div className="container">
           <div className="row">
             <div className="col-sm-4 col-md-6 col-lg-4">
@@ -42,7 +46,7 @@ const Product = (props) => {
               {product && product.quantity > 0 ?  <p className="label label-primary">In stock</p> : <p className="label label-danger">Out of stock</p>}
               <br />
               <br />
-              {product && <p><button className="btn btn-success">Add to cart</button></p>}
+              {product && <p><button  className="btn btn-success">Add to cart</button></p>}
             </div>
           </div>
        </div>

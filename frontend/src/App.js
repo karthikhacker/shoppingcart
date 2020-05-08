@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Home from './core/Home';
-import Menu from './core/Menu';
 import Shop from './core/Shop';
+import Cart from './core/Cart';
 import Signin from './user/Signin';
 import UserDashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
@@ -37,11 +37,11 @@ class  App extends React.Component {
       <Provider store={store}>
         <Router>
            <div>
-             <Menu />
              <Switch>
                <Route exact path="/" component={Home}/>
                <Route exact path="/signin" component={Signin}/>
                <Route exact path="/shop" component={Shop}/>
+               <Route exact path="/cart" component={Cart}/>
                <Route exact path="/product/:productId" component={Product}/>
                <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
                <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>

@@ -2,16 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
+import {totalItem} from './cartHelper';
 
- class Menu extends React.Component {
-
-     onLogout = () => {
-       this.props.logoutUser();
+ const Menu = ({isAuthenticated,user}) =>  {
+     const onLogout = () => {
+        logoutUser()
      }
-
-  render() {
-    const { isAuthenticated, user } = this.props.auth;
-    //console.log(user)
     return (
       <nav className="navbar navbar-default">
          <div className="container">
@@ -20,10 +16,11 @@ import { logoutUser } from '../actions';
            </div>
            <ul className="nav navbar-nav navbar-left">
             <li><Link to="/shop">Shop</Link></li>
+            <li><Link to="/cart">Cart <sup><small className="badge">{totalItem()}</small></sup></Link></li>
            </ul>
            {isAuthenticated && (
              <ul className="nav navbar-nav navbar-right">
-               <li><a style={{cursor : 'pointer'}} onClick={this.onLogout}>Logout</a></li>
+               <li><a style={{cursor : 'pointer'}} onClick={onLogout}>Logout</a></li>
              </ul>
            )}
            {isAuthenticated && user.role === 'User' && (
@@ -45,7 +42,7 @@ import { logoutUser } from '../actions';
          </div>
       </nav>
     );
-  }
+
 }
 
 const mapStateToProps = (state) => {

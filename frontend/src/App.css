@@ -20,3 +20,7 @@
 .search-link:hover{
   text-decoration: none;
 }
+.badge{
+  background:#f44336;
+  border:0;
+}

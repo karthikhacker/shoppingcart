@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from './Layout';
 import axios from 'axios';
 import Checkbox from './Checkbox';
 import RadioBox from './RadioBox';
@@ -114,6 +115,7 @@ class Shop extends React.Component{
    //console.log(this.state.size);
     return(
        <div className="section">
+         <Layout />
          <div className="container-fluid">
            <div className="row">
              <div className="col-sm-3">
