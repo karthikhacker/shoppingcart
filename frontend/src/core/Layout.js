@@ -1,10 +1,10 @@
 import React from 'react';
 import Menu from './Menu';
 
-const Layout = () => {
+const Layout = ({products}) => {
   return(
     <div>
-      <Menu />
+      <Menu products={products}/>
     </div>
   )
 }

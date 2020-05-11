@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 const ImageCarousel = ({product}) => {
-  console.log(product.productImage)
+  //console.log(product.productImage)
   return(
      <Carousel
      showThumbs={false}

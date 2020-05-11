@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../core/Layout';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../actions';
@@ -42,6 +43,7 @@ class AdminDashboard extends React.Component{
   render(){
     return(
       <div className="section">
+      <Layout/>
          <div className="jumbotron">
             <h2>Admin dashboard</h2>
          </div>

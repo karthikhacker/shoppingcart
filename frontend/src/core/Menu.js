@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
 import {totalItem} from './cartHelper';
 
- const Menu = ({isAuthenticated,user}) =>  {
+ const Menu = ({auth,user,products}) =>  {
      const onLogout = () => {
         logoutUser()
      }
@@ -16,24 +16,24 @@ import {totalItem} from './cartHelper';
            </div>
            <ul className="nav navbar-nav navbar-left">
             <li><Link to="/shop">Shop</Link></li>
-            <li><Link to="/cart">Cart <sup><small className="badge">{totalItem()}</small></sup></Link></li>
+            <li><Link to="/cart">Cart <sup><small className="badge">{totalItem(products)}</small></sup></Link></li>
            </ul>
-           {isAuthenticated && (
+           {auth.isAuthenticated && (
              <ul className="nav navbar-nav navbar-right">
                <li><a style={{cursor : 'pointer'}} onClick={onLogout}>Logout</a></li>
              </ul>
            )}
-           {isAuthenticated && user.role === 'User' && (
+           {auth.isAuthenticated && auth.user.role === 'User' && (
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/user/dashboard">Dashboard</Link></li>
               </ul>
            )}
-           {isAuthenticated && user.role === 'Admin' && (
+           {auth.isAuthenticated && auth.user.role === 'Admin' && (
              <ul className="nav navbar-nav navbar-right">
                <li><Link to="/admin/dashboard">Admin Dashboard</Link></li>
              </ul>
            )}
-           {!isAuthenticated && (
+           {!auth.isAuthenticated && (
              <ul className="nav navbar-nav navbar-right">
               <li><Link to="/signup">Signup</Link></li>
               <li><Link to="/signin">Signin</Link></li>
