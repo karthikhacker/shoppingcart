@@ -103,6 +103,7 @@ class Home extends React.Component{
                </ul>
             </div>
           </div>
+          
           <div className="container">
            <div className="page-header">
               <h3>New arrivals</h3>

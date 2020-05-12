@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^3.3.7",
+    "braintree-web": "^3.62.0",
+    "braintree-web-drop-in-react": "^1.1.1",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",

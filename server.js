@@ -12,7 +12,7 @@ require('dotenv').config();
  const userRoutes = require('./server/routes/user');
  const categoryRoutes = require('./server/routes/category');
  const productRoutes = require('./server/routes/product');
-
+ const braintreeRoutes = require('./server/routes/braintree');
 //mongodb connection
 mongoose.connect(process.env.MONGOURI,{
   useNewUrlParser : true,
@@ -32,6 +32,7 @@ require('./server/middlewares/passport')(passport);
 app.use('/api',userRoutes);
 app.use('/api',categoryRoutes);
 app.use('/api',productRoutes);
+app.use('/api',braintreeRoutes);
 app.use('/uploads',express.static('uploads'));
 //server
 const port = process.env.PORT;
