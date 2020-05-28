@@ -1,5 +1,9 @@
 .navbar{
   margin : 0;
+  padding:0;
+}
+.section{
+  margin : 0px;
 }
 .btn, .navbar, .thumbnail{
   border-radius:  0px;
@@ -23,4 +27,23 @@
 .badge{
   background:#f44336;
   border:0;
+}
+.close-btn{
+  font-size: 20px;
+  cursor: pointer;
+}
+.v1{
+  border-left: 3px solid #f5f5f5;
+  height: 200px;
+}
+.well{
+  background-color:#FFF;
+}
+.radio-btn{
+  margin-right: 15px;
+}
+.wells{
+  border: 1px solid #f44336;
+  margin-bottom: 5px;
+  padding: 20px;
 }

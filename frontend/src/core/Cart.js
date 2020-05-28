@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react';
+import {connect} from 'react-redux';
 import Layout from './Layout';
 import {Link} from 'react-router-dom';
 import {getCart,updateItem} from './cartHelper';
-import Checkout from './Checkout';
 
-const Cart = () => {
+const Cart = ({ auth }) => {
    //useState
    const [carts,setCarts] = useState([])
    //useEffect
@@ -35,11 +35,18 @@ const Cart = () => {
      localStorage.setItem('cart',JSON.stringify(cart))
      setCarts(cart)
    }
+   //cart total
+   const cartTotal = () => {
+     console.log(carts)
+      return carts.reduce((a,b) => {
+         return a + (b.quantity*b.price)
+      },0)
+   }
    //render cart item
    const renderCartItem = (carts) => {
       return(
         <div className="row">
-           <div className="col-xs-6 col-lg-8">
+          <div className="col-xs-4 col-lg-6">
             { carts.map((cart,index) => (
                <div className="panel panel-default" key={cart._id}>
                  <div className="panel-heading">
@@ -70,13 +77,17 @@ const Cart = () => {
                </div>
              ))
            }
-           </div>
-           <div className="col-xs-2 col-lg-4">
-              {carts.length > 0 ? <Checkout products={carts}/> : null}
-           </div>
+          </div>
+          <div className="col-xs-2 col-lg-4">
+            {carts.length > 0 && (
+              <div>
+                <span>Bag total</span> <span className="pull-right">$ {cartTotal()}</span>
+                 <hr />
+                <p>{auth.isAuthenticated  ? <Link className="btn btn-success" to="/checkout">Checkout</Link> : <Link className="btn btn-success" to="/signin">Login to checkout</Link>}</p>
+              </div>
+            )}
+          </div>
         </div>
-
-
       )
    }
    return(
@@ -89,4 +100,9 @@ const Cart = () => {
       </div>
    )
 }
-export default Cart;
+const mapStateToProps = (state) => {
+  return{
+    auth : state.auth
+  }
+}
+export default connect(mapStateToProps)(Cart);

@@ -17,6 +17,7 @@
     "query-string": "^6.12.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-modal": "^3.11.2",
     "react-redux": "^7.2.0",
     "react-responsive-carousel": "^3.1.57",
     "react-router-dom": "^5.1.2",

@@ -10,9 +10,11 @@ require('dotenv').config();
 
 //Routes
  const userRoutes = require('./server/routes/user');
+ const braintreeRoutes = require('./server/routes/braintree');
  const categoryRoutes = require('./server/routes/category');
  const productRoutes = require('./server/routes/product');
- const braintreeRoutes = require('./server/routes/braintree');
+ const orderRoutes = require('./server/routes/order');
+
 //mongodb connection
 mongoose.connect(process.env.MONGOURI,{
   useNewUrlParser : true,
@@ -28,12 +30,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(morgan('dev'));
 require('./server/middlewares/passport')(passport);
+
 //Routes Middleware
 app.use('/api',userRoutes);
 app.use('/api',categoryRoutes);
 app.use('/api',productRoutes);
+app.use('/api',orderRoutes);
 app.use('/api',braintreeRoutes);
+
 app.use('/uploads',express.static('uploads'));
+
 //server
 const port = process.env.PORT;
 app.listen(port, () => {

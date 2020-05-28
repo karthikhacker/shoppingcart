@@ -1,106 +1,100 @@
 import React,{useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import Layout from './Layout';
 import axios from 'axios';
-import {connect} from 'react-redux';
-import {Link,Redirect} from 'react-router-dom';
-import DropIn from "braintree-web-drop-in-react";
-import {emptyCart} from './cartHelper';
+import {getCart} from './cartHelper';
 
-const Checkout = ({products,auth}) => {
-  //state
-  const [data,setData] = useState({
-    success : false,
-    clientToken : null,
-    error : '',
-    instance : {},
-    address : ''
-  })
-  //getBrainteeetoken
-  const getBraintreeToken = () => {
-    axios.get('http://localhost:4000/api/braintree/getToken')
-     .then(res => {
-         console.log(res.data)
-         setData({clientToken : res.data.clientToken})
-     })
-     .catch(error => {
-        console.log(error)
-     })
-  }
+const Checkout = ({history}) => {
+  const [address, setAddress] = useState([]);
+  const [carts,setCarts] = useState(getCart());
+  const [error,setError] = useState({});
+  const [selectedAddress,setSelectedAddress] = useState("");
+  const [completed,setCompleted] = useState(false)
+
   //useEffect
   useEffect(() => {
-     getBraintreeToken()
+     getAddress()
   },[])
-  //Buy
-  const buy = () => {
-    let nonce;
-    let getNonce = data.instance.requestPaymentMethod()
-     .then(data => {
-        //console.log(data)
-        nonce = data.nonce;
-        //console.log(nonce,cartTotal(products))
-        const paymentData = {
-          paymentMethodNonce : nonce,
-          amount : cartTotal(products)
-        }
-        //processPayment
-        axios.post('http://localhost:4000/api/braintree/payment',paymentData)
-         .then(res => {
-            //console.log(res.data)
-            setData({...res.data,success : res.data.success})
-            //empty cart
-            
-         })
-         .catch(error => {
-            console.log(error)
-         })
-     })
-     .catch(error => {
-        console.log(error)
-     })
-  }
-  //showSuccess
-   const showSuccess = (success) => {
-      return(
-        <div className="alert alert-success" style={{ display : success ? "" : "none" }}>
-          Thanks your payment received
-        </div>
-      )
-   }
-  //showDropIn
-  const showDropIn = () => (
-    <div>
-     {data.clientToken !== null && products.length > 0 ? (
-         <div>
-           <DropIn
-             options={{ authorization : data.clientToken }}
-             onInstance={(instance) => data.instance = instance }
-           />
-           <button onClick={buy} className="btn btn-success btn-block">Pay</button>
-         </div>
-     ) : null
-   }
-    </div>
-  )
+
   //cart total
   const cartTotal = () => {
-     return products.reduce((a,b) => {
+    //console.log(carts)
+     return carts.reduce((a,b) => {
         return a + (b.quantity*b.price)
      },0)
   }
-  return(
-       <div className="total">
-         {showSuccess(data.success)}
-         <p>Bag total : <span className="pull-right"> $ {cartTotal()}</span></p>
-         {auth.isAuthenticated ? (
-           <span>{showDropIn()}</span>
-         ) : (
-           <Link className="btn btn-danger" to="/signin">Login to place order</Link>
-         )}
+
+  // get shipping address
+
+
+  //get address
+  const getAddress = () => {
+    axios.get('http://localhost:4000/api/address')
+     .then(res => {
+        //console.log(res.data)
+        setAddress(res.data)
+     })
+     .catch(error => {
+        setError(error)
+     })
+  }
+
+  //handleChange
+   const handleChange = (e) => {
+      setSelectedAddress(e.target.value)
+      //setCompleted(!completed)
+      //console.log(e.target.value)
+   }
+
+   //add shipping address
+
+   //render address
+   const renderAddress = () => {
+     return(
+       <div className="address">
+        {address.map((add) => (
+            <div className="well" key={add._id}>
+              <div className="row">
+                <div className="col-lg-2">
+                  <input type="radio" name={add.name} onChange={handleChange} value={add._id} />
+                </div>
+                <div className="col-lg-6">
+                   <p>{add.name}</p>
+                   <p>
+                     <span>{add.houseNo}</span> <span>{add.street}</span>
+                     <br />
+                     <span>{add.locality}</span> <span>{add.city}</span>
+                     <br />
+                     <span>{add.state}</span> - <span>{add.pincode}</span>
+                     <br />
+                     <span>{add.mobileNumber}</span>
+                   </p>
+                </div>
+              </div>
+              <hr />
+              <button className="btn btn-danger btn-sm">REMOVE</button>
+            </div>
+         ))
+       }
        </div>
+     )
+   }
+  return(
+    <div className="section">
+      <Layout />
+      <div className="container">
+         <div className="row">
+            <div className="col-lg-4">
+               {renderAddress()}
+            </div>
+            <div className="col-lg-4">
+               Your bag total :  $ {cartTotal()}
+               <hr />
+               {selectedAddress ? <Link to={`/checkout/payment/${selectedAddress}`} className="btn btn-success btn-sm">Continue</Link> : null }
+            </div>
+         </div>
+      </div>
+    </div>
   )
 }
-const mapStateToProps = (state) => {
-  return{
-    auth : state.auth
-  }
-}
-export default connect(mapStateToProps)(Checkout);
+export default Checkout;

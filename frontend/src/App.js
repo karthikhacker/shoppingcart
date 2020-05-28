@@ -5,6 +5,8 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Home from './core/Home';
 import Shop from './core/Shop';
 import Cart from './core/Cart';
+import Checkout from './core/Checkout';
+import Payment from './core/Payment';
 import Signin from './user/Signin';
 import UserDashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
@@ -44,6 +46,8 @@ class  App extends React.Component {
                <Route exact path="/cart" component={Cart}/>
                <Route exact path="/product/:productId" component={Product}/>
                <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
+               <PrivateRoute exact path="/checkout" component={Checkout}/>
+               <PrivateRoute exact path="/checkout/payment/:id" component={Payment}/>
                <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
                <AdminRoute exact path="/create/category" component={CreateCategory}/>
                <AdminRoute exact path="/create/product" component={CreateProduct}/>
