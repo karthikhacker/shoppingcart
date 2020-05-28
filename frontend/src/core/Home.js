@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card';
 import Search from './Search';
+import {getCart,totalItem} from './cartHelper';
 
 class Home extends React.Component{
+
   state = {
      productBySell : [],
      productByArrival : [],
      products : [],
      visibleProducts : [],
+     carts : getCart() || [],
      error : false,
      loading : false,
      searchTerms : ''
@@ -82,11 +85,12 @@ class Home extends React.Component{
      }
      this.setState({ visibleProducts : queryData })
   }
+
   render(){
-    console.log(this.state.visibleProducts);
+    //console.log(this.state.carts);
     return(
        <div className="section">
-          <Layout />
+          <Layout products={this.state.carts}/>
           <div className="jumbotron">
             <div className="container">
                <Search updateSearch={this.handleUpdate}/>
@@ -103,7 +107,7 @@ class Home extends React.Component{
                </ul>
             </div>
           </div>
-          
+
           <div className="container">
            <div className="page-header">
               <h3>New arrivals</h3>
@@ -111,7 +115,7 @@ class Home extends React.Component{
             <div className="row">
               {this.state.productByArrival.map((product) => (
                 <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
-                 <Card key={product._id} product={product}/>
+                 <Card key={product._id} product={product} carts={this.state.carts}/>
                 </div>
               ))}
             </div>
@@ -123,7 +127,7 @@ class Home extends React.Component{
              <div className="row">
               {this.state.productBySell.map((product) => (
                 <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
-                 <Card key={product._id} product={product}/>
+                 <Card key={product._id} product={product} carts={this.state.carts}/>
                 </div>
               ))}
              </div>

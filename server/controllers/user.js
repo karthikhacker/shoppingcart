@@ -37,13 +37,12 @@ exports.addAddress = (req,res) => {
 }
 //get address
 exports.getAddress = (req,res) => {
-   Address.find()
-    .exec((err,address) => {
-       if(err){
-         return res.status(400).json({ error : getErrorMessage(err)})
-       }
-       res.status(200).json(address)
-    })
+   Address.find({user : req.user._id},(err,address) => {
+     if(err){
+       return res.status(400).json({ error : 'Address not found' })
+     }
+     res.status(200).json(address);
+   })
 }
 //Remove address
 exports.removeAddress = (req,res) => {

@@ -124,7 +124,7 @@ class Shop extends React.Component{
                <h3>Filter by Price</h3>
                <RadioBox handleFilters={filters => this.handleFilters(filters,'price')}  prices={prices} />
              </div>
-             <div className="col-sm-9">
+             <div className="col-lg-9">
                 <h3 className="text-center">Products</h3>
                 <div className="row">
                   {

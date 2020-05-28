@@ -52,7 +52,7 @@ const Checkout = ({history}) => {
    const renderAddress = () => {
      return(
        <div className="address">
-        {address.map((add) => (
+        { address.length !== 0 ? address.map((add) => (
             <div className="well" key={add._id}>
               <div className="row">
                 <div className="col-lg-2">
@@ -74,7 +74,7 @@ const Checkout = ({history}) => {
               <hr />
               <button className="btn btn-danger btn-sm">REMOVE</button>
             </div>
-         ))
+         )) : <p>No address added</p>
        }
        </div>
      )

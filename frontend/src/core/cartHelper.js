@@ -1,5 +1,5 @@
 //Add to cart
-export const addItem = (item, cb) => {
+export const addItem = (item,cb) => {
    let cart = []
    if(typeof window !== 'undefined'){
      if(localStorage.getItem('cart')){
@@ -13,7 +13,7 @@ export const addItem = (item, cb) => {
        return cart.find(p => p._id  === id)
      });
      localStorage.setItem('cart',JSON.stringify(cart));
-     cb()
+     cb();
    }
 }
 //getTotal

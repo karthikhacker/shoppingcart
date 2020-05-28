@@ -6,11 +6,9 @@ import {getCart,updateItem} from './cartHelper';
 
 const Cart = ({ auth }) => {
    //useState
-   const [carts,setCarts] = useState([])
+   const [carts,setCarts] = useState(getCart())
    //useEffect
-   useEffect(() => {
-      setCarts(getCart())
-   },[])
+
    //handleChange
    const handleChange = index => event => {
       //console.log(productId)
@@ -47,7 +45,7 @@ const Cart = ({ auth }) => {
       return(
         <div className="row">
           <div className="col-xs-4 col-lg-6">
-            { carts.map((cart,index) => (
+            { carts.length !== 0 ?  carts.map((cart,index) => (
                <div className="panel panel-default" key={cart._id}>
                  <div className="panel-heading">
                    <h3>{cart.name}</h3>
@@ -75,7 +73,7 @@ const Cart = ({ auth }) => {
                    <button href="#" onClick={() => {removeItem(cart._id)}}  className="btn btn-danger btn-sm">REMOVE</button>
                  </div>
                </div>
-             ))
+             )) : null
            }
           </div>
           <div className="col-xs-2 col-lg-4">
@@ -84,7 +82,7 @@ const Cart = ({ auth }) => {
                 <span>Bag total</span> <span className="pull-right">$ {cartTotal()}</span>
                  <hr />
                 <p>{auth.isAuthenticated  ? <Link className="btn btn-success" to="/checkout">Checkout</Link> : <Link className="btn btn-success" to="/signin">Login to checkout</Link>}</p>
-              </div>
+             </div>
             )}
           </div>
         </div>
@@ -95,7 +93,7 @@ const Cart = ({ auth }) => {
         <Layout products={carts}/>
         <div className="container">
          {carts.length > 0 ? <p>Your bag has {carts.length} items</p> : <p className="text-center">Your bag is empty</p>}
-         {renderCartItem(carts)}
+          {renderCartItem(carts)}
         </div>
       </div>
    )

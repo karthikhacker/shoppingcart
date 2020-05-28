@@ -1,21 +1,25 @@
 import React,{useState,useEffect} from 'react';
 import Layout from './Layout';
-import {Redirect} from 'react-router-dom';
+import {Redirect,Link} from 'react-router-dom';
 import axios from 'axios';
 import ImageCarousel from './ImageCarousel';
 import Card from './Card';
-import {addItem} from './cartHelper';
+import {addItem,totalItem} from './cartHelper';
 
 
 const Product = (props) => {
   const [product,setProduct] = useState({});
+  const [carts,setCarts] = useState(totalItem() || [])
+  const [goToCart,setGoToCart] = useState(false)
   const [error, setError] = useState(false);
   const [similarProduct,setSimilarProduct] = useState([]);
   const [redirect,setRedirect] = useState(false);
   //Add to cart
   const addToCart = () => {
      addItem(product,() => {
-        setRedirect(true)
+        setCarts(product)
+        setGoToCart(true)
+        setRedirect(false)
      })
   }
   //redirect
@@ -34,7 +38,7 @@ const Product = (props) => {
           //similar product
           axios.get(`http://localhost:4000/api/products/related/${res.data._id}`)
             .then(res => {
-              console.log(res.data)
+              //console.log(res.data)
               setSimilarProduct(res.data)
             })
         }
@@ -46,7 +50,7 @@ const Product = (props) => {
 
   return(
     <div className="section">
-       <Layout />
+       <Layout products={carts}/>
        <div className="container">
           {shouldRedirect(redirect)}
           <div className="row">
@@ -61,7 +65,7 @@ const Product = (props) => {
               {product && product.quantity > 0 ?  <p className="label label-primary">In stock</p> : <p className="label label-danger">Out of stock</p>}
               <br />
               <br />
-              {product && <p><button onClick={addToCart}  className="btn btn-success">Add to cart</button></p>}
+               { goToCart ?  <p className="lead"><Link to="/cart" className="btn btn-warning">GO TO BAG  &#8594;</Link></p> : <p><button onClick={addToCart}  className="btn btn-success">Add to cart</button></p>}
             </div>
           </div>
        </div>

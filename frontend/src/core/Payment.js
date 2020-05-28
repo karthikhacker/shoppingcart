@@ -7,17 +7,19 @@ import DropIn from "braintree-web-drop-in-react";
 
 const Payment = ({match}) => {
   //state
-  const [carts,setCarts] = useState(getCart());
+  const [carts,setCarts] = useState([]);
   const [paymentData,setPaymentData] = useState({
      clientToken : null,
-     instance : {},
-     address : match.params.id
+     instance : {}
   })
+  const [address,setAddress] = useState("")
   const [error,setError] = useState("")
   const [success,setSuccess] = useState("");
 
   //useEffect
   useEffect(() => {
+     setAddress( match.params.id)
+     setCarts(getCart())
      getToken()
   },[])
   //get token
@@ -40,12 +42,38 @@ const Payment = ({match}) => {
      },0)
   }
 
+  //create order
+  const createOrder = (orderData) => {
+    //console.log(orderData)
+     axios.post('http://localhost:4000/api/order/create',orderData)
+     .then(res => {
+        //console.log(res.data)
+         if(res.data){
+           //empty cart
+            if(typeof window !== "undefined"){
+              localStorage.removeItem("cart")
+            }
+         }
+     })
+     .catch(error => {
+        setError(error)
+     })
+  }
+
   // processPayment
   const processPayment = (payload) => {
     axios.post('http://localhost:4000/api/braintree/payment',payload)
      .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
         setSuccess(res.data.success)
+        //create order
+        const orderData = {
+           products : carts,
+           transaction_id : res.data.transaction.id,
+           amount : res.data.transaction.amount,
+           address : address
+        }
+        createOrder(orderData)
      })
      .catch(error => {
         setError(error)
@@ -74,7 +102,7 @@ const Payment = ({match}) => {
 
   return(
      <div className="section">
-       <Layout />
+       <Layout products={carts}/>
        {success ? <div className=" text-center alert alert-success"><p>Payment successfull <span className="pull-right">&#10004;</span></p></div> : null}
        <div className="container">
           <div className="row">
