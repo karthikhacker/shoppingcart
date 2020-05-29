@@ -23,12 +23,8 @@ exports.signin = (req,res) => {
   })
 }
 //current user
-exports.currentUser = (req,res) => {
-  return res.json({
-     id : req.user._id,
-     name : req.user.name,
-     email : req.user.email,
-     role : req.user.role
-  })
+exports.userProfile = async (req,res) => {
+   const user = await User.findOne({ _id : req.user._id}).populate("history")
+   res.json(user)
 }
 //
