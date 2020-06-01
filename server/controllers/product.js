@@ -170,3 +170,15 @@ exports.productList = (req,res) => {
      res.status(200).json(products);
    })
 }
+
+// product update sold quantity
+// exports.sold = (req,res) => {
+//   let bulkOps = req.order.products.map(item => {
+//      return {
+//        updateOne : {
+//           filter : {_id : item._id},
+//           update : { $inc : { quantity :  sold : +item.}}
+//        };
+//      }
+//   })
+// }

@@ -35,7 +35,7 @@ export const setCurrentUser = (decoded) => {
 // get profile
 export const getProfile = () => {
   return dispatch => {
-    axios.get('http://localhost:4000/api/user')
+    axios.get('http://localhost:4000/api/user/profile')
      .then(res =>
        dispatch({
         type : GET_PROFILE,

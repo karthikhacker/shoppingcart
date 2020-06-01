@@ -35,6 +35,8 @@ class AdminDashboard extends React.Component{
           <ul className="list-group">
             <li className="list-group-item"><Link to="/create/category">Create category</Link></li>
             <li className="list-group-item"><Link to="/create/product">Create product</Link></li>
+            <li className="list-group-item"><Link to="/admin/orders">Orders</Link></li>
+            <li className="list-group-item"><Link to="/admin/manage/products">Mange products</Link></li>
           </ul>
         </div>
       </div>
