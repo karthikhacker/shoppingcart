@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../actions';
-
+import Layout from '../core/Layout';
 
 class UserDashboard extends React.Component{
   componentDidMount(){
@@ -48,6 +48,7 @@ class UserDashboard extends React.Component{
   render(){
     return(
       <div className="section">
+         <Layout />
          <div className="jumbotron">
            <h2 className="text-center">User Dashboard</h2>
          </div>

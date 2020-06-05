@@ -8,6 +8,21 @@
 .btn, .navbar, .thumbnail{
   border-radius:  0px;
 }
+.btn-outline{
+  background-color: #FFF;
+  border-radius: 5px;
+  border: 3px solid #e91e63;
+  width: 20%;
+  height: 45px;
+  color:#9e9e9e;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.btn-outline:hover{
+   background-color: #e91e63;
+   color: #FFF;
+   transition: 2s ease;
+}
 .thumbnail span{
    margin: 10px;
 }

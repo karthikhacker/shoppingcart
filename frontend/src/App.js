@@ -13,6 +13,7 @@ import AdminDashboard from './user/AdminDashboard';
 import CreateCategory from './admin/CreateCategory';
 import CreateProduct from './admin/CreateProduct';
 import ManageProducts from './admin/ManageProducts';
+import UpdateProduct from './admin/UpdateProduct';
 import Order from './admin/Order';
 import Product from './core/Product';
 import { Provider } from 'react-redux';
@@ -55,6 +56,7 @@ class  App extends React.Component {
                <AdminRoute exact path="/create/product" component={CreateProduct}/>
                <AdminRoute exact path="/admin/orders" component={Order}/>
                <AdminRoute exact path="/admin/manage/products" component={ManageProducts}/>
+               <AdminRoute exact path="/admin/product/update/:id" component={UpdateProduct}/>
              </Switch>
            </div>
         </Router>

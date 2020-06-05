@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
 import {totalItem} from './cartHelper';
 
- const Menu = ({auth,user,products}) =>  {
+ const Menu = ({auth,user,products,logoutUser}) =>  {
      const onLogout = () => {
         logoutUser()
+        //console.log("logout")
      }
     return (
       <nav className="navbar navbar-default">

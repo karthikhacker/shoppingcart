@@ -52,7 +52,7 @@ exports.createProduct = (req,res) => {
 // Product by id
 exports.productById = (req,res,next,id) => {
   Product.findById(id)
-  .populate('category')
+  .populate('category','name')
    .exec((err,product) => {
      if(err || !product){
        return res.status(400).json({ error : 'Product not found'})
@@ -171,14 +171,35 @@ exports.productList = (req,res) => {
    })
 }
 
-// product update sold quantity
-// exports.sold = (req,res) => {
-//   let bulkOps = req.order.products.map(item => {
-//      return {
-//        updateOne : {
-//           filter : {_id : item._id},
-//           update : { $inc : { quantity :  sold : +item.}}
-//        };
-//      }
-//   })
-// }
+//Product update
+
+exports.update = (req,res) => {
+      const id = { _id : req.params.productId}
+      const data = {
+        name : req.body.name,
+        price : req.body.price,
+        productImage : req.body.productImage,
+        category : req.body.category,
+        description : req.body.description,
+        sold : req.body.sold,
+        quantity : req.body.quantity
+      }
+      Product.findOneAndUpdate(id,data,(err) => {
+         if(err){
+           return res.status(400).json({ err : 'Error updating'})
+         }
+         res.status(200).json({ message : 'UPDATED'})
+      })
+    }
+
+
+// Remove product
+exports.remove = (req,res) => {
+  let product = req.product;
+  product.remove((err) => {
+     if(err){
+       return res.status(400).json({ error :  getErrorMessage(err)})
+     }
+     res.status(200).json({ message : 'DELETED' })
+  })
+}
