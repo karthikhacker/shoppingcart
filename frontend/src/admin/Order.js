@@ -80,6 +80,15 @@ const Order = () => {
     })
   }
 
+  //show loading
+  const showLoading = (loading) => {
+     return(
+       <div className="text-center">
+         {loading ? <p>Loading ....</p> : null}
+       </div>
+     )
+  }
+
   //render orders
   const renderOrders = () => {
     return(
@@ -135,7 +144,8 @@ const Order = () => {
           <h4 className="text-center">Total no of orders - {orders.length}</h4>
        </div>
        <div className="main" style={{ borderTop : "2px solid #eeeeee"}}>
-          {orders.length > 0 ? renderOrders() : <p className="text-center lead">No orders</p>}
+          {showLoading(loading)}
+          {orders.length > 0 ? renderOrders() : null}
        </div>
     </div>
   )
