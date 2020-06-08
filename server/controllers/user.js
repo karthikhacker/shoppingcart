@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const Address = require('../models/address');
-const Shipping = require('../models/shipping');
 const getErrorMessage = require('../helpers/errorHandler');
 
 
@@ -37,13 +36,26 @@ exports.addAddress = (req,res) => {
 }
 //get address
 exports.getAddress = (req,res) => {
-   Address.find({user : req.user._id},(err,address) => {
-     if(err){
-       return res.status(400).json({ error : 'Address not found' })
+   Address.find({ user : req.user._id},(err,address) => {
+     if(address.length === 0){
+       return res.status(400).json({ message : 'Add address for shipping' })
      }
      res.status(200).json(address);
    })
 }
+
+//get single Address
+exports.read = (req,res) => {
+  //
+  Address.findOne({ _id : req.params.addressId})
+   .exec((err,address) => {
+     if(err){
+       return res.status(400).json({ message : 'Address not found'})
+     }
+     res.status(200).json(address);
+   })
+}
+
 //Remove address
 exports.removeAddress = (req,res) => {
    Address.remove({_id : req.params.addressId},(err) => {
@@ -54,28 +66,24 @@ exports.removeAddress = (req,res) => {
    })
 }
 
-//add shipping address
-exports.add = (req,res) => {
-    const shipping = new Shipping({
-      selectedAddress : req.body.selectedAddress
-    });
-    shipping.save((err) => {
-       if(err){
-         return res.status(400).json(err)
-       }
-       res.status(200).json({ message : 'Shipping address addded'})
-    })
-    /console.log(req.body)
-}
-
-//get shipping address
-exports.read = (req,res) => {
-  Shipping.find()
-   .populate('address')
-   .exec((err,shippingaddress) => {
-      if(err){
-        return res.status(400).json(err)
-      }
-      res.status(200).json(shippingaddress)
-   })
+//Edit address
+exports.edit = (req,res) => {
+  const id = {_id : req.params.addressId};
+  const data = {
+    name : req.body.name,
+    mobileNumber : req.body.mobileNumber,
+    houseNo : req.body.houseNo,
+    street : req.body.street,
+    locality : req.body.locality,
+    city : req.body.city,
+    state : req.body.state,
+    pincode : req.body.pincode
+  }
+  Address.findOneAndUpdate(id,data,(err) => {
+     if(err){
+       return res.status(400).json({ message : 'Error in updating the data.' })
+     }
+     res.status(200).json({ message : 'Address updated' })
+  })
+  //console.log(id,data)
 }

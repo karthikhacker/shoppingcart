@@ -1,58 +1,81 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 import Layout from './Layout';
-import  axios from 'axios';
-import {Link} from 'react-router-dom';
 
-const AddAddress = ({history}) => {
+const UpdateAddress = ({match,history}) => {
   const [loading,setLoading] = useState(false);
-  const [error,setError] = useState("");
   const [values,setValues] = useState({
-     name : '',
-     houseNo : '',
-     street : '',
-     locality : '',
-     city : '',
-     state : '',
-     pincode : '',
-     mobileNumber : ''
+    name : '',
+    houseNo : '',
+    street : '',
+    locality : '',
+    city : '',
+    state : '',
+    pincode : '',
+    mobileNumber : ''
   })
+
+  //useEffect
+  useEffect(() => {
+    getAddress(match.params.id)
+  },[])
 
   //handleChange
   const handleChange = name => e => {
-    setValues({ ...values, [name] : e.target.value,error : false })
+    setValues({ ...values, [name] : e.target.value})
+  }
+
+  //get address
+  const getAddress = () => {
+    axios.get(`http://localhost:4000/api/address/${match.params.id}`)
+      .then(res => {
+         console.log(res.data)
+         setValues({
+           name : res.data.name,
+           houseNo : res.data.houseNo,
+           street : res.data.street,
+           locality : res.data.locality,
+           city :res.data.city,
+           state : res.data.state,
+           pincode : res.data.pincode,
+           mobileNumber : res.data.mobileNumber
+         })
+      })
+      .catch(error => {
+         console.log(error)
+      })
   }
 
   //handleSubmit
   const handleSubmit = (e) => {
-    //
     e.preventDefault();
     const {name,street,houseNo,mobileNumber,locality,city,state,pincode} = values;
-     const data = {
-        name : name,
-        houseNo : houseNo,
-        street : street,
-        locality : locality,
-        city : city,
-        state : state,
-        pincode : pincode,
-        mobileNumber : mobileNumber
-     }
-     //console.log(data);
-     setLoading(true)
-     axios.post('http://localhost:4000/api/add/address',data)
-     .then(res => {
-        if(res.data){
-          history.push("/checkout")
-        }
-        setValues({ name : '',mobileNumber : '',houseNo : '',street : '',locality : '',city : '',state : '',pincode : '' })
+    const data = {
+       name : name,
+       houseNo : houseNo,
+       street : street,
+       locality : locality,
+       city : city,
+       state : state,
+       pincode : pincode,
+       mobileNumber : mobileNumber
+    }
+     console.log(data);
+
+    setLoading(true)
+    axios.put(`http://localhost:4000/api/address/edit/${match.params.id}`,data)
+      .then(res => {
+        console.log(res.data)
+        history.push('/checkout')
         setLoading(false)
-     })
-     .catch(error => {
-       setError(error.response.data)
-       setLoading(false)
-     })
+      })
+      .catch(error => {
+         console.log(error)
+         setLoading(false)
+      })
   }
-  //form
+
+  // form
   const form = () => {
     return(
       <form onSubmit={handleSubmit}>
@@ -87,16 +110,17 @@ const AddAddress = ({history}) => {
   return(
     <div className="section">
       <Layout />
+      <div className="jumbotron">
+         <h4 className="text-center">UPDATE ADDRESS</h4>
+      </div>
       <div className="container">
         <div className="row">
           <div className="col-lg-4 col-lg-offset-4">
-             <h3>Add address</h3>
-             {error ? <p className="alert alert-danger">{error.error}</p> : null}
-             {form()}
+            {form()}
           </div>
         </div>
       </div>
     </div>
   )
 }
-export default AddAddress;
+export default UpdateAddress;

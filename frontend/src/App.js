@@ -8,6 +8,7 @@ import Cart from './core/Cart';
 import Checkout from './core/Checkout';
 import Payment from './core/Payment';
 import AddAddress from './core/AddAddress';
+import UpdateAddress from './core/UpdateAddress';
 import Signin from './user/Signin';
 import UserDashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
@@ -55,6 +56,7 @@ class  App extends React.Component {
                <PrivateRoute exact path="/checkout/payment/:id" component={Payment}/>
                <PrivateRoute exact path="/user/order" component={UserOrder}/>
                <PrivateRoute exact path="/add/address" component={AddAddress}/>
+               <PrivateRoute exact path="/address/edit/:id" component={UpdateAddress}/>
                <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
                <AdminRoute exact path="/create/category" component={CreateCategory}/>
                <AdminRoute exact path="/create/product" component={CreateProduct}/>

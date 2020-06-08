@@ -1,15 +1,15 @@
 import React,{useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import Layout from './Layout';
 import axios from 'axios';
 import {getCart} from './cartHelper';
 
 const Checkout = ({history}) => {
   const [address, setAddress] = useState([]);
+  const [loading,setLoading] = useState(false);
   const [carts,setCarts] = useState(getCart());
-  const [error,setError] = useState({});
+  const [error,setError] = useState("");
   const [selectedAddress,setSelectedAddress] = useState("");
-  const [completed,setCompleted] = useState(false)
 
   //useEffect
   useEffect(() => {
@@ -29,13 +29,16 @@ const Checkout = ({history}) => {
 
   //get address
   const getAddress = () => {
+    setLoading(true)
     axios.get('http://localhost:4000/api/address')
      .then(res => {
-        //console.log(res.data)
+        console.log(res.data)
         setAddress(res.data)
+        setLoading(false)
      })
      .catch(error => {
-        setError(error)
+        setError(error.response.data)
+        setLoading(false)
      })
   }
 
@@ -51,10 +54,10 @@ const Checkout = ({history}) => {
      axios.delete(`http://localhost:4000/api/address/${id}`)
        .then(res => {
          console.log(res.data)
-         getAddress()
+         setAddress({ address : ad => ad._id !== id })
        })
        .catch(error => {
-          setError(error);
+          setError(error.message);
        })
    }
 
@@ -62,7 +65,7 @@ const Checkout = ({history}) => {
    const renderAddress = () => {
      return(
        <div className="address">
-        { address.length !== 0 ? address.map((add) => (
+        { address.length ?  address.map((add) => (
             <div className="well" key={add._id}>
               <div className="row">
                 <div className="col-lg-2">
@@ -82,12 +85,24 @@ const Checkout = ({history}) => {
                 </div>
               </div>
               <hr />
-              <button onClick={() => deleteAddress(add._id)} className="btn btn-danger btn-sm">REMOVE</button>
+              <div className="action-btn">
+                <button onClick={() => deleteAddress(add._id)} className="btn btn-danger btn-md">REMOVE</button>
+                 <Link to={`/address/edit/${add._id}`} className="btn btn-success btn-md">EDIT</Link>
+              </div>
             </div>
-         )) : <p>No address added</p>
+         )) : null
        }
        </div>
      )
+   }
+
+   //show loading
+   const showLoading = (loading) => {
+      return(
+        <div className="text-center">
+          {loading ? <p>Loading ....</p> : null}
+        </div>
+      )
    }
   return(
     <div className="section">
@@ -99,6 +114,8 @@ const Checkout = ({history}) => {
                 <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
                </p>
                {address.length > 0 ?  <h4>Select address for Shipping</h4> : null}
+               {error ?  <p className="lead text-center">{error.message}</p> : null}
+               {showLoading(loading)}
                {renderAddress()}
             </div>
             <div className="col-lg-4">
