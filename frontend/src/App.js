@@ -7,6 +7,7 @@ import Shop from './core/Shop';
 import Cart from './core/Cart';
 import Checkout from './core/Checkout';
 import Payment from './core/Payment';
+import AddAddress from './core/AddAddress';
 import Signin from './user/Signin';
 import UserDashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
@@ -15,6 +16,7 @@ import CreateProduct from './admin/CreateProduct';
 import ManageProducts from './admin/ManageProducts';
 import UpdateProduct from './admin/UpdateProduct';
 import Order from './admin/Order';
+import UserOrder from './user/UserOrder';
 import Product from './core/Product';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -51,6 +53,8 @@ class  App extends React.Component {
                <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
                <PrivateRoute exact path="/checkout" component={Checkout}/>
                <PrivateRoute exact path="/checkout/payment/:id" component={Payment}/>
+               <PrivateRoute exact path="/user/order" component={UserOrder}/>
+               <PrivateRoute exact path="/add/address" component={AddAddress}/>
                <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
                <AdminRoute exact path="/create/category" component={CreateCategory}/>
                <AdminRoute exact path="/create/product" component={CreateProduct}/>

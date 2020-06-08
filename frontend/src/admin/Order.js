@@ -83,18 +83,17 @@ const Order = () => {
   //render orders
   const renderOrders = () => {
     return(
-       <div className="row">
-          <div className="col-lg-12">
+       <div className="container table-responsive">
              <table className="table">
                <thead>
                  <tr>
                    <th>ID</th>
-                   <th>TOTAL NO OF PRODUCTS</th>
+                   <th>PRODUCTS</th>
                    <th>STATUS</th>
-                   <th>TRANSACTION ID</th>
+                   <th>TRANS ID</th>
                    <th>AMOUNT</th>
-                   <th>ORDERED BY</th>
-                   <th>ORDERED DATE</th>
+                   <th>ORDERED</th>
+                   <th>DATE</th>
                    <th>ADDRESS</th>
                  </tr>
                </thead>
@@ -126,14 +125,8 @@ const Order = () => {
                 }
                </tbody>
              </table>
-          </div>
        </div>
     )
-  }
-
-  //  noo rders
-  const noOrders = (orders) => {
-     return orders.length < 1 ? <p>No orders</p> : null;
   }
   return(
     <div className="main">
@@ -141,8 +134,8 @@ const Order = () => {
        <div className="jumbotron">
           <h4 className="text-center">Total no of orders - {orders.length}</h4>
        </div>
-       <div className="container" style={{ borderTop : "2px solid #eeeeee"}}>
-          {renderOrders()}
+       <div className="main" style={{ borderTop : "2px solid #eeeeee"}}>
+          {orders.length > 0 ? renderOrders() : <p className="text-center lead">No orders</p>}
        </div>
     </div>
   )

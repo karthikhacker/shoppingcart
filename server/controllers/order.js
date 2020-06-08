@@ -15,8 +15,7 @@ exports.orderById = (req,res,next,id) =>{
 }
 
 //create order
-exports.create = async (req,res) => {
-  const user = await User.findOne({ _id : req.user._id})
+exports.create = (req,res) => {
   //res.json(user)
   //create order
    const order = new Order({
@@ -26,11 +25,12 @@ exports.create = async (req,res) => {
       amount : req.body.amount,
       address : req.body.address
    });
-   await order.save();
-   //push order to user
-   user.history.push(order._id)
-  await  user.save()
-  res.json(order)
+   order.save((err,order) => {
+      if(err){
+        return res.status(400).json({ error : 'Error creating order'})
+      }
+      res.status(200).json(order)
+   })
 }
 
 //List all orders

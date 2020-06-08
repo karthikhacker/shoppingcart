@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../core/Layout';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import classnames from 'classnames';
@@ -241,6 +242,7 @@ class CreateProduct extends React.Component{
     console.log(this.props.product);
     return(
       <div className="section">
+        <Layout />
         <div className="jumbotron">
           <h2 className="text-center">Add Product</h2>
         </div>

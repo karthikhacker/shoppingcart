@@ -47,7 +47,7 @@ const Payment = ({match}) => {
     //console.log(orderData)
      axios.post('http://localhost:4000/api/order/create',orderData)
      .then(res => {
-        //console.log(res.data)
+        console.log(res.data)
          if(res.data){
            //empty cart
             if(typeof window !== "undefined"){

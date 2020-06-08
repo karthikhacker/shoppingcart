@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const Order = require('../models/order');
 
 exports.signin = (req,res) => {
   User.findOne({ email : req.body.email},(err,user) => {
@@ -24,7 +25,19 @@ exports.signin = (req,res) => {
 }
 //current user
 exports.userProfile = async (req,res) => {
-   const user = await User.findOne({ _id : req.user._id}).populate("history")
+   const user = await User.findOne({ _id : req.user._id });
    res.json(user)
 }
-//
+
+// get order
+exports.orderByUser = (req,res) => {
+  Order.findOne({ user : req.user._id })
+       .populate("user address","name email mobileNumber houseNo street locality city state pincode")
+       .exec((err,order) => {
+         if(err){
+           return res.status(400).json({ error : 'Order not found'})
+         }
+         res.json(order)
+       })
+
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../actions';
@@ -8,6 +9,7 @@ class UserDashboard extends React.Component{
   componentDidMount(){
      this.props.getProfile();
   }
+
   componentWillReceiveProps(nextProps){
     if(nextProps.auth.user.role === 'Admin'){
       return this.props.history.push("/admin/dashboard")
@@ -30,6 +32,8 @@ class UserDashboard extends React.Component{
       </div>
     )
   }
+
+  //Links
   linkPanel = () => {
     return(
       <div className="panel panel-default">
@@ -40,12 +44,14 @@ class UserDashboard extends React.Component{
           <ul className="list-group">
             <li className="list-group-item"><Link to="/cart">cart</Link></li>
             <li className="list-group-item"><Link to="/profile/update">update profile</Link></li>
+            <li className="list-group-item"><Link to="/user/order">Orders</Link></li>
           </ul>
         </div>
       </div>
     )
   }
   render(){
+    //console.log(this.state.orders)
     return(
       <div className="section">
          <Layout />

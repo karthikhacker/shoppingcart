@@ -32,13 +32,7 @@ const userSchema = new  mongoose.Schema({
      type : String,
      enum : ['Admin','User'],
      default : 'User'
-   },
-   history : [
-     {
-        type : mongoose.Schema.ObjectId,
-        ref : 'Order'
-     }
-   ]
+   }
 
 })
 userSchema.plugin(uniqueValidator);

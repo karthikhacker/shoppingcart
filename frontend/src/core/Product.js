@@ -72,11 +72,11 @@ const Product = (props) => {
        <div className="container">
          <h4>SIMILAR PRODUCT</h4>
          <div className="row">
-           {similarProduct.map((product) => (
+           { similarProduct.length > 0 ?  similarProduct.map((product) => (
              <div className="col-sm-1 col-md-2 col-lg-4" key={product._id}>
                 <Card product={product}/>
              </div>
-           ))}
+           )) : <p className="text-center lead">NO SIMILAR PRODUCTS</p>}
          </div>
        </div>
     </div>

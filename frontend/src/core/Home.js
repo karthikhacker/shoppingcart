@@ -4,54 +4,19 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card';
 import Search from './Search';
-import {getCart,totalItem} from './cartHelper';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 class Home extends React.Component{
 
   state = {
-     productBySell : [],
-     productByArrival : [],
      products : [],
      visibleProducts : [],
-     carts : getCart() || [],
      error : false,
      loading : false,
      searchTerms : ''
   }
-  //get product by sell
-  loadProductBySell = () => {
-    this.setState({ loading : true})
-    axios.get('http://localhost:4000/api/products/sell')
-     .then(res => {
-        this.setState({
-          productBySell : res.data,
-          loading : false
-        })
-     })
-     .catch(error => {
-        this.setState({
-           error : error.response.data,
-           loading : false
-        })
-     })
-  }
-  // load products by arrival
-  loadProductByArrival  = () => {
-    this.setState({ loading : true })
-    axios.get('http://localhost:4000/api/products/latest')
-     .then(res => {
-        this.setState({
-          productByArrival : res.data,
-          loading : false
-        })
-     })
-     .catch(error => {
-        this.setState({
-           error : error.response.data,
-           loading : false
-        })
-     })
-  }
+
   //get products
   getProducts = () => {
     axios.get('http://localhost:4000/api/products')
@@ -64,8 +29,7 @@ class Home extends React.Component{
      })
   }
   componentDidMount(){
-    this.loadProductBySell()
-    this.loadProductByArrival()
+
     this.getProducts()
   }
   //handleUpdate
@@ -96,7 +60,7 @@ class Home extends React.Component{
                <Search updateSearch={this.handleUpdate}/>
                <ul className="list-group">
                {
-                 this.state.visibleProducts.map((product) => (
+                   this.state.visibleProducts.map((product) => (
                     <Link to={`/product/${product._id}`} key={product._id} className="search-link">
                       <li className="list-group-item" >
                        <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img"/> {product.name}
@@ -106,31 +70,6 @@ class Home extends React.Component{
                }
                </ul>
             </div>
-          </div>
-
-          <div className="container">
-           <div className="page-header">
-              <h3>New arrivals</h3>
-            </div>
-            <div className="row">
-              {this.state.productByArrival.map((product) => (
-                <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
-                 <Card key={product._id} product={product} carts={this.state.carts}/>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="container">
-            <div className="page-header">
-               <h3>Best sellers</h3>
-            </div>
-             <div className="row">
-              {this.state.productBySell.map((product) => (
-                <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
-                 <Card key={product._id} product={product} carts={this.state.carts}/>
-                </div>
-              ))}
-             </div>
           </div>
        </div>
     )

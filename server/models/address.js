@@ -7,13 +7,13 @@ const addressSchema = new mongoose.Schema({
      required : 'Name is required',
      trim : true
    },
-   mobileNumber : {type : Number, required : true},
-   houseNo : {type : Number,required : true},
-   street : {type : String, required : true},
-   locality : {type : String,required : true},
-   city : {type : String,required : true},
-   state : {type : String,required : true},
-   pincode : {type : Number, required : true}
+   mobileNumber : {type : Number, required : "Mobile number required"},
+   houseNo : {type : String,required : "House no required."},
+   street : {type : String, required : "Street name is reuired."},
+   locality : {type : String,required : "LOCALITY is required."},
+   city : {type : String,required : "city is required."},
+   state : {type : String,required : "State is required."},
+   pincode : {type : String, required : "Pincode is required."}
 },{timestamps : true})
 
 

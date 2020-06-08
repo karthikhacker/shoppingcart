@@ -79,8 +79,3 @@ exports.read = (req,res) => {
       res.status(200).json(shippingaddress)
    })
 }
-
-exports.order =  async (req,res) => {
-   const  user = User.findOne({ _id : req.user._id});
-    res.json()
-}

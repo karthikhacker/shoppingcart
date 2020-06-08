@@ -46,7 +46,17 @@ const Checkout = ({history}) => {
       //console.log(e.target.value)
    }
 
-   //add shipping address
+   //deleteAddress
+   const deleteAddress = (id) => {
+     axios.delete(`http://localhost:4000/api/address/${id}`)
+       .then(res => {
+         console.log(res.data)
+         getAddress()
+       })
+       .catch(error => {
+          setError(error);
+       })
+   }
 
    //render address
    const renderAddress = () => {
@@ -72,7 +82,7 @@ const Checkout = ({history}) => {
                 </div>
               </div>
               <hr />
-              <button className="btn btn-danger btn-sm">REMOVE</button>
+              <button onClick={() => deleteAddress(add._id)} className="btn btn-danger btn-sm">REMOVE</button>
             </div>
          )) : <p>No address added</p>
        }
@@ -85,6 +95,10 @@ const Checkout = ({history}) => {
       <div className="container">
          <div className="row">
             <div className="col-lg-4">
+               <p>
+                <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
+               </p>
+               {address.length > 0 ?  <h4>Select address for communication</h4> : null}
                {renderAddress()}
             </div>
             <div className="col-lg-4">
