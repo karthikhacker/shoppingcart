@@ -98,7 +98,7 @@ const Checkout = ({history}) => {
                <p>
                 <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
                </p>
-               {address.length > 0 ?  <h4>Select address for communication</h4> : null}
+               {address.length > 0 ?  <h4>Select address for Shipping</h4> : null}
                {renderAddress()}
             </div>
             <div className="col-lg-4">
