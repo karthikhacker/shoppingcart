@@ -105,20 +105,20 @@ const Order = () => {
                       <td>{showStatus(order)}</td>
                       <td>{order.transaction_id}</td>
                       <td>&#36;	 {order.amount}</td>
-                      <td>{order.user.name}</td>
+                      <td>{order.user.name ? order.user.name : null}</td>
                       <td>{moment(order.createdAt).fromNow()}</td>
                       <td>
-                        <span>{order.address.name}</span>
-                        <br />
-                        <span>{order.address.houseNo}</span>
-                        <br />
-                        <span>{order.address.street}, {order.address.locality}</span>
-                        <br />
-                        <span>{order.address.city}</span>
-                        <br />
-                        <span>{order.address.state} - {order.address.pincode}</span>
-                        <br />
-                        <span>{order.address.mobileNumber}</span>
+                        {order.address ?
+                           <div>
+                             <span>{order.address.name}</span>
+                             <span>{order.address.houseNo}</span>
+                             <span>{order.address.street}</span>
+                             <span>{order.address.locality}</span>
+                             <span>{order.address.city}</span>
+                             <span>{order.address.state}</span>
+                             <span>{order.address.pincode}</span>
+                             <span>{order.address.mobileNumber}</span>
+                           </div>  : <span>No address</span>}
                       </td>
                     </tr>
                  ))
