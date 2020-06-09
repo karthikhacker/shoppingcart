@@ -54,7 +54,7 @@ const Checkout = ({history}) => {
      axios.delete(`http://localhost:4000/api/address/${id}`)
        .then(res => {
          console.log(res.data)
-         setAddress({ address : ad => ad._id !== id })
+         setAddress( address.filter(ad => ad._id !== id) )
        })
        .catch(error => {
           setError(error.message);
@@ -113,7 +113,7 @@ const Checkout = ({history}) => {
                <p>
                 <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
                </p>
-               {address.length > 0 ?  <h4>Select address for Shipping</h4> : null}
+               {address.length < 1 ? <p className="text-center">Add address for shipping</p> : null}
                {error ?  <p className="lead text-center">{error.message}</p> : null}
                {showLoading(loading)}
                {renderAddress()}

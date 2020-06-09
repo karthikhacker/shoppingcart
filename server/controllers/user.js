@@ -37,8 +37,8 @@ exports.addAddress = (req,res) => {
 //get address
 exports.getAddress = (req,res) => {
    Address.find({ user : req.user._id},(err,address) => {
-     if(address.length === 0){
-       return res.status(400).json({ message : 'Add address for shipping' })
+     if(err){
+       return res.status(400).json({ message : getErrorMessage(err) })
      }
      res.status(200).json(address);
    })
