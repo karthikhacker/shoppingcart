@@ -28,6 +28,7 @@ const userSchema = new  mongoose.Schema({
    about : {
       type : String
    },
+   location : {type : String,required : 'Location is required.'},
    role : {
      type : String,
      enum : ['Admin','User'],

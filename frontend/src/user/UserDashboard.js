@@ -26,6 +26,8 @@ class UserDashboard extends React.Component{
           <ul className="list-group">
             <li className="list-group-item">{profile.name}</li>
             <li className="list-group-item">{profile.email}</li>
+            <li className="list-group-item">About me : {profile.about}</li>
+            <li className="list-group-item">Location : {profile.location}</li>
             <li className="list-group-item">{profile.role === 'Admin' ? 'Admin' : 'User'}</li>
           </ul>
         </div>
@@ -43,7 +45,7 @@ class UserDashboard extends React.Component{
         <div className="panel-body">
           <ul className="list-group">
             <li className="list-group-item"><Link to="/cart">cart</Link></li>
-            <li className="list-group-item"><Link to="/profile/update">update profile</Link></li>
+            <li className="list-group-item"><Link to="/user/profile/update">update profile</Link></li>
             <li className="list-group-item"><Link to="/user/order">Orders</Link></li>
           </ul>
         </div>

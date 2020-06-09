@@ -29,6 +29,15 @@ exports.userProfile = async (req,res) => {
    res.json(user)
 }
 
+exports.update = (req,res) => {
+  User.findOneAndUpdate({_id : req.user._id},{$set : req.body},{$new : true},(err) => {
+     if(err){
+       return res.status(200).json({ error : "Updating error"})
+     }
+     res.status(200).json({ message : 'Profile updated'})
+  })
+}
+
 // get order
 exports.orderByUser = (req,res) => {
   Order.find({ user : req.user._id })
