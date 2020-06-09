@@ -31,11 +31,11 @@ exports.userProfile = async (req,res) => {
 
 // get order
 exports.orderByUser = (req,res) => {
-  Order.findOne({ user : req.user._id })
+  Order.find({ user : req.user._id })
        .populate("user address","name email mobileNumber houseNo street locality city state pincode")
        .exec((err,order) => {
-         if(err){
-           return res.status(400).json({ error : 'Order not found'})
+         if(err || order.length < 1){
+           return res.status(400).json({ error : 'No Orders'})
          }
          res.json(order)
        })
