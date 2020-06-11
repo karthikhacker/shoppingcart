@@ -52,6 +52,8 @@ const UserOrder = () => {
                              <p>{pro.description}</p>
                              <p> &#36;	 {pro.price}</p>
                              <p>Ordered date : {moment(order.createdAt).fromNow()}</p>
+                             <hr />
+                             {order &&  <p>Order status : <span className="label label-info">{order.status}</span></p> }
                            </div>
                         </div>
                      </div>
