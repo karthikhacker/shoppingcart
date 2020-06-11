@@ -33,7 +33,7 @@ const Password = () => {
       axios.put('http://localhost:4000/api/user/change/password',data)
        .then(res => {
           console.log(res.data)
-          setSuccess(res.data.message)
+          setSuccess(res.data)
           setLoading(false)
        })
        .catch(error => {
@@ -71,7 +71,7 @@ const Password = () => {
         <div className="row">
           <div className="col-lg-4 col-lg-offset-4">
              {error ? <p className='text-danger'>{error.message}</p> : null}
-             {success.message ?  <p className="alert alert-success">{success.message}</p> : null }
+             {success.message &&  <p className="alert alert-success">{success.message} Login with your new password</p>  }
              {form()}
           </div>
         </div>
