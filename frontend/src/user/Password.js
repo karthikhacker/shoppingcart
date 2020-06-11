@@ -24,22 +24,24 @@ const Password = () => {
     e.preventDefault();
     if(values.password === "" || values.newPassword === "" || values.confirmPassword === ""){
        setError({ message : 'All fields are required'})
+    }else if(values.newPassword !== values.confirmPassword){
+      setError({ message  : 'Password didnt match.'})
     }else{
-      const data = {
-        password : values.password,
-        newPassword : values.newPassword
-      }
-      setLoading(true)
-      axios.put('http://localhost:4000/api/user/change/password',data)
-       .then(res => {
-          console.log(res.data)
-          setSuccess(res.data)
-          setLoading(false)
-       })
-       .catch(error => {
-          setError(error.response.data)
-          setLoading(false)
-       })
+        const data = {
+          password : values.password,
+          newPassword : values.newPassword
+        }
+        setLoading(true)
+        axios.put('http://localhost:4000/api/user/change/password',data)
+         .then(res => {
+            console.log(res.data)
+            setSuccess(res.data)
+            setLoading(false)
+         })
+         .catch(error => {
+            setError(error.response.data)
+            setLoading(false)
+         })
     }
 
   }
