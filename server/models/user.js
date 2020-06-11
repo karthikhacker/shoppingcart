@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new  mongoose.Schema({
    name : {
@@ -37,21 +36,4 @@ const userSchema = new  mongoose.Schema({
 
 })
 userSchema.plugin(uniqueValidator);
-
-//methods
-userSchema.pre('save',function(next){
-   var user = this;
-   bcrypt.hash(user.password,null,null,function(err,hash){
-      if(err) return next(err);
-      user.password = hash;
-      next();
-   })
-});
-
-//compare password
-userSchema.methods.comparePassword = function(password){
-    var user = this;
-   return bcrypt.compareSync(password,user.password);
-}
-
 module.exports = mongoose.model('User',userSchema);

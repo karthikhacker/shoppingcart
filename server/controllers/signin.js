@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const Order = require('../models/order');
+const bcrypt = require('bcryptjs');
+
 
 exports.signin = (req,res) => {
   User.findOne({ email : req.body.email},(err,user) => {
@@ -8,8 +10,8 @@ exports.signin = (req,res) => {
         return res.status(400).json({ error : 'User not found'})
      }
      if(user){
-       const validPassword = user.comparePassword(req.body.password);
-       if(!validPassword){
+       const isMatch = bcrypt.compareSync(req.body.password, user.password); // true
+       if(!isMatch){
          return res.status(400).json({ error : 'oops password didnt match '})
        }else{
          const token = jwt.sign({
@@ -27,6 +29,43 @@ exports.signin = (req,res) => {
 exports.userProfile = async (req,res) => {
    const user = await User.findOne({ _id : req.user._id });
    res.json(user)
+
+}
+
+//change password
+exports.changePassword = (req,res) => {
+  User.findOne({_id : req.user._id},(err,user) => {
+     if(err){
+        return res.status(400).json({ error : 'Error'})
+     }
+     if(user){
+       const isMatch = bcrypt.compareSync(req.body.password, user.password); // true
+       if(!isMatch){
+         return res.status(400).json({ message : 'Old password didnt match'})
+       }else{
+         const salt = bcrypt.genSaltSync(10);
+         const hash = bcrypt.hashSync(req.body.newPassword, salt);
+         const data = {
+            password : hash
+         }
+         User.findOneAndUpdate({ _id : req.user._id},data,(err) => {
+            if(err){
+              return res.status(400).json({ error : 'Error'})
+            }
+            res.status(200).json({ message : 'Password updated'})
+         })
+       }
+     }
+  })
+  // const salt = bcrypt.genSaltSync(10);
+  // const hash = bcrypt.hashSync(req.body.password, salt);
+  // const data = { password : hash}
+  // User.findOneAndUpdate({ _id : req.user._id},data,(err) => {
+  //    if(err){
+  //      return res.status(400).json({ message : 'Error'})
+  //    }
+  //    res.status(200).json({ message : 'Password updated'})
+  // })
 }
 
 exports.update = (req,res) => {

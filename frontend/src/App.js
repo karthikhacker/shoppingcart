@@ -11,6 +11,7 @@ import AddAddress from './core/AddAddress';
 import UpdateAddress from './core/UpdateAddress';
 import Signin from './user/Signin';
 import UserDashboard from './user/UserDashboard';
+import Password from './user/Password';
 import UpdateProfile from './user/UpdateProfile';
 import AdminDashboard from './user/AdminDashboard';
 import CreateCategory from './admin/CreateCategory';
@@ -54,6 +55,7 @@ class  App extends React.Component {
                <Route exact path="/product/:productId" component={Product}/>
                <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
                <PrivateRoute exact path="/user/profile/update" component={UpdateProfile}/>
+               <PrivateRoute exact path="/user/change/password" component={Password}/>
                <PrivateRoute exact path="/checkout" component={Checkout}/>
                <PrivateRoute exact path="/checkout/payment/:id" component={Payment}/>
                <PrivateRoute exact path="/user/order" component={UserOrder}/>

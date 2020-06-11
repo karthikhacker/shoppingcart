@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
 
@@ -61,18 +62,19 @@ const UpdateProfile = ({history}) => {
      return(
        <form onSubmit={handleSubmit}>
          <div className="form-group">
-           <input type="text" className="form-control" onChange={handleChange('name')} value={user.name}/>
+           <input type="text" className="form-control" onChange={handleChange('name')} value={user.name || ""}/>
          </div>
          <div className="form-group">
-           <input type="text" className="form-control" onChange={handleChange('email')} value={user.email}/>
+           <input type="text" className="form-control" onChange={handleChange('email')} value={user.email || ''}/>
          </div>
          <div className="form-group">
-           <input type="text" className="form-control" onChange={handleChange('about')}  value={user.about}/>
+           <input type="text" className="form-control" onChange={handleChange('about')}  value={user.about || ''}/>
          </div>
          <div className="form-group">
-           <input type="text" className="form-control" onChange={handleChange('location')} value={user.location}/>
+           <input type="text" className="form-control" onChange={handleChange('location')} value={user.location || ''}/>
          </div>
-         <button className="btn btn-primary btn-sm">{loading ? "Loading..." : "Submit"}</button>
+         <Link className="btn btn-success btn-block btn-sm" to="/user/change/password">CHANGE PASSWORD</Link>
+         <button className="btn btn-primary btn-sm btn-block">{loading ? "Loading..." : "Submit"}</button>
        </form>
      )
    }

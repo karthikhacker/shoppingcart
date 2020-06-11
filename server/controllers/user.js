@@ -1,11 +1,19 @@
 const User = require('../models/user');
 const Address = require('../models/address');
 const getErrorMessage = require('../helpers/errorHandler');
+const bcrypt = require('bcryptjs');
 
 
 // user signup
-exports.signup = (req,res) => {
-  const user = new User(req.body);
+exports.signup = async (req,res) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.password, salt);
+  const user = new User({
+    name : req.body.name,
+    email : req.body.email,
+    password : hash,
+    location : req.body.location
+  });
   user.save((err,user) => {
      if(err){
        return res.status(400).json({ error : getErrorMessage(err) })

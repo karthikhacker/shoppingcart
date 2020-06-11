@@ -26,8 +26,8 @@ class UserDashboard extends React.Component{
           <ul className="list-group">
             <li className="list-group-item">{profile.name}</li>
             <li className="list-group-item">{profile.email}</li>
-            <li className="list-group-item">About me : {profile.about}</li>
-            <li className="list-group-item">Location : {profile.location}</li>
+            <li className="list-group-item">{profile.about ?  <span>About :  {profile.about}</span> : 'Not added'}</li>
+            <li className="list-group-item">{profile.location ? <span>Location :  {profile.location}</span> : null}</li>
             <li className="list-group-item">{profile.role === 'Admin' ? 'Admin' : 'User'}</li>
           </ul>
         </div>
