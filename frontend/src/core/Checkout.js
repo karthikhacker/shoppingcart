@@ -113,7 +113,7 @@ const Checkout = ({history}) => {
                <p>
                 <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
                </p>
-               {address.length < 1 ? <p className="text-center">Add address for shipping</p> : null}
+               {address.length < 1 ? <p className="text-center">Add address for shipping</p> : <p className="text-muted">Select address for shipping</p>}
                {error ?  <p className="lead text-center">{error.message}</p> : null}
                {showLoading(loading)}
                {renderAddress()}
