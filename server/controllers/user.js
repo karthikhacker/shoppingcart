@@ -2,24 +2,55 @@ const User = require('../models/user');
 const Address = require('../models/address');
 const getErrorMessage = require('../helpers/errorHandler');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+require('dotenv').config()
+
 
 
 // user signup
 exports.signup = async (req,res) => {
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(req.body.password, salt);
-  const user = new User({
-    name : req.body.name,
-    email : req.body.email,
-    password : hash,
-    location : req.body.location
-  });
-  user.save((err,user) => {
-     if(err){
-       return res.status(400).json({ error : getErrorMessage(err) })
+  //Check user
+  User.findOne({ email :  req.body.email}).exec((err,user) => {
+     if(user){
+       res.status(400).json({ message : 'User already exists'})
      }
-     res.status(200).json({ message : 'Account created',user});
+     const salt = bcrypt.genSaltSync(10);
+     const hash = bcrypt.hashSync(req.body.password, salt);
+     const {name,email,password,location} = req.body
+     //const password = hash;
+     //generate token
+     const token = jwt.sign({name,email,password,location},process.env.JWT_ACCOUNT_ACTIVATION,{expiresIn : '10m'})
+     // send activation email
+
+     var transporter = nodemailer.createTransport({
+         service: "Gmail",
+         auth: {
+           user: 'karthik.sundararajan85@gmail.com', // generated ethereal user
+           pass: 'hacker24', // generated ethereal password
+          },
+     });
+     const emailData = {
+       from : 'karthik.sundararajan85@gmail.com',
+       to : 'karthik.arm7@gmail.com',
+       submit : 'Account activation email',
+       text: "Some uselss text",
+       html: `
+             <p>Use following link to activate your account</p>
+             <p>${process.env.CLIENT_URL}/auth/activate</p>
+       `
+     }
+     transporter.sendMail(emailData, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        //res.status(200).json({ message : 'Email send ' + info.response})
+        console.log(info.response)
+      }
+    });
+
   })
+
 }
 
 //add user address

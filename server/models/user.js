@@ -27,11 +27,15 @@ const userSchema = new  mongoose.Schema({
    about : {
       type : String
    },
-   location : {type : String,required : 'Location is required.'},
+   location : {type : String},
    role : {
      type : String,
      enum : ['Admin','User'],
      default : 'User'
+   },
+   passwordPasswordLink : {
+     data : String,
+     defaut : ''
    }
 
 })

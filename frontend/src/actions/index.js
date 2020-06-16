@@ -1,6 +1,7 @@
 import { ADD_PRODUCT, PRODUCT_LOADING, PRODUCT_ERROR, CATEGORY_SUCCESS,CATEGORY_ERROR,CATEGORY_LOADING, AUTH_ERROR, USER_LOADING, SET_CURRENT_USER, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_PROFILE_ERROR } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
+import setToken from '../utils/loginHelper';
 import jwtDecode from 'jwt-decode';
 
 // user Signin
@@ -11,7 +12,7 @@ export const login = (userData) => {
       .then(res => {
         const { token } = res.data
         // set token to localStorage
-        localStorage.setItem('jwt',token)
+        setToken(token)
        //set token to auth header
        setAuthToken(token)
        //decode token to get user data
@@ -25,6 +26,27 @@ export const login = (userData) => {
       }))
   }
 }
+
+// google login
+export const googleLogin = (data) => {
+  return dispatch => {
+    dispatch(userLoading())
+    axios.post('http://localhost:4000/api/google-login',data)
+    .then(res => {
+      console.log(res.data)
+      const { token } = res.data
+      // set token to localStorage
+      setToken(token)
+     //set token to auth header
+     setAuthToken(token)
+     //decode token to get user data
+     const decoded = jwtDecode(token);
+     //set current user
+     dispatch(setCurrentUser(decoded))
+    })
+  }
+}
+
 // set current user or loggedin user
 export const setCurrentUser = (decoded) => {
   return{

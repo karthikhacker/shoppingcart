@@ -2,6 +2,8 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
+const {OAuth2Client} = require('google-auth-library');
+
 
 
 exports.signin = (req,res) => {
@@ -20,11 +22,60 @@ exports.signin = (req,res) => {
            email : user.email,
            role : user.role
          },process.env.JWT_SECRET);
-         res.status(200).json({ token : 'Bearer ' +  token, user })
+         return res.status(200).json({ token : 'Bearer ' +  token, user })
        }
      }
   })
 }
+
+//Google login
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+exports.googleLogin = (req,res) => {
+   const{idToken} = req.body
+   client.verifyIdToken({idToken,audience : process.env.GOOGLE_CLIENT_ID})
+    .then(response => {
+       console.log(response)
+       const {email_verified,email,name} = response.payload;
+       if(email_verified){
+          User.findOne({email}).exec((err,user) => {
+             if(user){
+               //console.log(user)
+               //generate token
+               const token = jwt.sign({
+                 id : user.id,
+                 name : user.name,
+                 email : user.email,
+                 role : user.role
+               },process.env.JWT_SECRET);
+               return res.status(200).json({ token : 'Bearer ' +  token, user })
+             }else{
+               //save user to db
+               let pass = email + process.env.JWT_SECRET;
+               const salt = bcrypt.genSaltSync(10);
+               const hash = bcrypt.hashSync(pass, salt);
+               const password = hash;
+               user = new User({ email , name, password});
+               user.save((err,user) => {
+                  if(err){
+                    return res.status(400).json({ message : err})
+                  }
+                  //create token
+                  const token = jwt.sign({
+                    id : user.id,
+                    name : user.name,
+                    email : user.email,
+                    role : user.role
+                  },process.env.JWT_SECRET);
+                  return res.status(200).json({ token : 'Bearer ' +  token, user })
+               })
+             }
+          })
+       }else{
+         return res.status(400).json({ message : 'Google login failed'})
+       }
+    })
+}
+
 //current user
 exports.userProfile = async (req,res) => {
    const user = await User.findOne({ _id : req.user._id });

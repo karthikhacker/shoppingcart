@@ -1,6 +1,11 @@
 import React from 'react';
+import Layout from '../core/Layout';
+import setToken from '../utils/loginHelper';
+import setAuthToken from '../utils/setAuthToken';
 import { connect } from 'react-redux';
-import { login } from '../actions';
+import { login,googleLogin } from '../actions';
+import GoogleLogin from 'react-google-login';
+import axios from 'axios';
 
 class Signin extends React.Component{
   state = {
@@ -43,6 +48,24 @@ class Signin extends React.Component{
     }
   }
 
+  responseGoogle = (response) => {
+     console.log(response.tokenId)
+     const data = {idToken : response.tokenId}
+     this.props.googleLogin(data)
+     // axios.post('http://localhost:4000/api/google-login',data)
+     //  .then(res => {
+     //     console.log(res.data)
+     //      //set token to localStorage
+     //      const token = res.data.token;
+     //      setToken(token)
+     //      //set token to auth header
+     //      setAuthToken(token)
+     //  })
+     //  .catch(error => {
+     //     console.log(error)
+     //  })
+  }
+
   //form
   form = () => {
     const { loading } = this.props.auth;
@@ -57,6 +80,17 @@ class Signin extends React.Component{
             <input onChange={this.handlePassword} value={this.state.password} type="password" className="form-control" placeholder="Password"/>
          </div>
          <button className="btn btn-success btn-sm">{loading ? '...Loading' : 'Login'}</button>
+         <hr />
+         <GoogleLogin
+            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+            render={renderProps => (
+              <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn btn-primary"> <i className="fa fa-google" aria-hidden="true"></i>
+ LOGIN WITH GOOGLE</button>
+            )}
+            onSuccess={this.responseGoogle}
+            onFailure={this.responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
       </form>
     )
   }
@@ -70,10 +104,12 @@ class Signin extends React.Component{
     )
   }
   render(){
+
     return(
        <div className="section">
+         <Layout />
          <div className="jumbotron">
-           <h2>Signin</h2>
+           <h2 className="text-center">Signin</h2>
          </div>
          <div className="container">
             <div className="row">
@@ -92,4 +128,4 @@ const mapStateToProps = (state) => {
     auth : state.auth
   }
 }
-export default connect(mapStateToProps,{ login })(Signin);
+export default connect(mapStateToProps,{ login,googleLogin })(Signin);
