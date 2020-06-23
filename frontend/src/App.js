@@ -10,10 +10,14 @@ import Payment from './core/Payment';
 import AddAddress from './core/AddAddress';
 import UpdateAddress from './core/UpdateAddress';
 import Signin from './user/Signin';
+import Signup from './user/Signup';
 import UserDashboard from './user/UserDashboard';
 import Password from './user/Password';
+import Forgot from './user/Forgot';
+import Reset from './user/Reset';
 import UpdateProfile from './user/UpdateProfile';
 import AdminDashboard from './user/AdminDashboard';
+import Activate from './user/Activate';
 import CreateCategory from './admin/CreateCategory';
 import CreateProduct from './admin/CreateProduct';
 import ManageProducts from './admin/ManageProducts';
@@ -50,6 +54,10 @@ class  App extends React.Component {
              <Switch>
                <Route exact path="/" component={Home}/>
                <Route exact path="/signin" component={Signin}/>
+               <Route exact path="/signup" component={Signup}/>
+               <Route exact path="/auth/activate/:token" component={Activate}/>
+               <Route exact path="/auth/password/reset/:token" component={Reset}/>
+               <Route exact path="/forgot/password" component={Forgot}/>
                <Route exact path="/shop" component={Shop}/>
                <Route exact path="/cart" component={Cart}/>
                <Route exact path="/product/:productId" component={Product}/>

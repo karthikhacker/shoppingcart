@@ -2,12 +2,15 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
-const { signup,addAddress,getAddress,removeAddress,edit,read } = require('../controllers/user');
+const { signup,accountActiation,forgotPassword,resetPassword, addAddress,getAddress,removeAddress,edit,read } = require('../controllers/user');
 const { signin, userProfile, update,orderByUser,changePassword,googleLogin } = require('../controllers/signin');
 
 //auth middleware
 //routes
 router.post('/signup',signup);
+router.post('/account/activation',accountActiation);
+router.put('/forgot/password',forgotPassword);
+router.put('/reset/password',resetPassword);
 router.post('/signin',signin);
 router.get('/user/profile', passport.authenticate('jwt',{session : false}),  userProfile);
 router.put('/user/change/password', passport.authenticate('jwt',{session : false}),   changePassword);

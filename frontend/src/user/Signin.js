@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 import setToken from '../utils/loginHelper';
 import setAuthToken from '../utils/setAuthToken';
@@ -80,6 +81,7 @@ class Signin extends React.Component{
             <input onChange={this.handlePassword} value={this.state.password} type="password" className="form-control" placeholder="Password"/>
          </div>
          <button className="btn btn-success btn-sm">{loading ? '...Loading' : 'Login'}</button>
+         <Link to="/forgot/password" className="pull-right">Forgot password ?</Link>
          <hr />
          <GoogleLogin
             clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}

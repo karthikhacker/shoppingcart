@@ -33,7 +33,7 @@ const userSchema = new  mongoose.Schema({
      enum : ['Admin','User'],
      default : 'User'
    },
-   passwordPasswordLink : {
+   resetPasswordLink : {
      data : String,
      defaut : ''
    }

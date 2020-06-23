@@ -203,3 +203,14 @@ exports.remove = (req,res) => {
      res.status(200).json({ message : 'DELETED' })
   })
 }
+
+// categoryByProduct
+exports.categoryByProduct = (req,res) => {
+  Product.find({ category : req.params.categoryId})
+   .then((products) => {
+      if(products.length < 1){
+        return res.status(400).json({ message : 'No products'})
+      }
+      res.status(200).json(products)
+   })
+}

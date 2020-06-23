@@ -9,7 +9,7 @@ const {OAuth2Client} = require('google-auth-library');
 exports.signin = (req,res) => {
   User.findOne({ email : req.body.email},(err,user) => {
      if(err || !user){
-        return res.status(400).json({ error : 'User not found'})
+        return res.status(400).json({ error : 'User not found, please signup up'})
      }
      if(user){
        const isMatch = bcrypt.compareSync(req.body.password, user.password); // true
