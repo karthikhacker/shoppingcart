@@ -7,6 +7,7 @@ import Footer from './Footer';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Search from './Search';
+import Loading from './Loading';
 import image1 from '../assests/image1.jpg'
 import image2 from '../assests/image2.jpg'
 import image3 from '../assests/image3.jpg'
@@ -93,7 +94,7 @@ class Home extends React.Component{
   //showLoading
   showLoading = () => {
      return(
-       this.state.loading ? "Loading ...." : this.renderLatestProducts()
+       this.state.loading ? <Loading /> : this.renderLatestProducts()
      )
   }
 

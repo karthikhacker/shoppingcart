@@ -114,7 +114,7 @@ const Order = () => {
                       <td>{showStatus(order)}</td>
                       <td>{order.transaction_id}</td>
                       <td>&#36;	 {order.amount}</td>
-                      <td>{order.user.name ? order.user.name : null}</td>
+                      <td>{order.user ? order.user.name : null}</td>
                       <td>{moment(order.createdAt).fromNow()}</td>
                       <td>
                         {order.address ?

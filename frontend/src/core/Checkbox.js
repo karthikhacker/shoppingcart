@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from './Loading';
 
 class Checkbox extends React.Component{
   state = {
@@ -23,7 +24,7 @@ class Checkbox extends React.Component{
     //console.log(this.state.checked);
     return(
       <div className="checkbox">
-        <ul className="list-group">
+        {this.props.loading ? <Loading /> : <ul className="list-group">
         {categories.map((c) => (
           <li className="list-group-item" key={c._id}>
             <label>
@@ -33,7 +34,8 @@ class Checkbox extends React.Component{
           </li>
         ))
          }
-        </ul>
+        </ul>}
+
       </div>
     )
   }

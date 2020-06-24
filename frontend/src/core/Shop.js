@@ -5,6 +5,7 @@ import Checkbox from './Checkbox';
 import RadioBox from './RadioBox';
 import { prices } from './FixedPrice';
 import Card from './Card';
+import Loading from './Loading';
 
 class Shop extends React.Component{
   state = {
@@ -120,13 +121,13 @@ class Shop extends React.Component{
            <div className="row">
              <div className="col-sm-3">
                <h3>Filter by categories</h3>
-               <Checkbox handleFilters={filters => this.handleFilters(filters,'category')}  categories={this.state.categories} />
+               <Checkbox handleFilters={filters => this.handleFilters(filters,'category')} loading={this.state.loading}  categories={this.state.categories} />
                <h3>Filter by Price</h3>
                <RadioBox handleFilters={filters => this.handleFilters(filters,'price')}  prices={prices} />
              </div>
              <div className="col-lg-9">
                 <h3 className="text-center">Products</h3>
-                <div className="row">
+                {this.state.loading ? <Loading /> : <div className="row">
                   {
                     this.state.products.length > 0 ? this.state.products.slice(0,this.state.limit).map((product) => (
                       <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
@@ -134,7 +135,7 @@ class Shop extends React.Component{
                       </div>
                     )) : <p className="text-center lead">No products</p>
                   }
-                </div>
+                </div>}
                 {this.loadMoreButton()}
              </div>
            </div>

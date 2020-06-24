@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+body{
+  margin:0;
+  padding:0;
+}
+h1,h2,h3,h4,h5{
+  font-family: 'Roboto', sans-serif;
+}
+
+p{
+  font-family: 'Oswald', sans-serif;
+}
+
+/************
+ Navbar
+ ************/
+.navbar-default{
+  margin:0;
+  padding:0;
+  background-color: #FFF;
+}
+.navbar-header > .navbar-brand{
+  color:#880e4f;
+  font-family: 'Kaushan Script', cursive;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 22px;
+}
+.navbar-header > .navbar-brand:hover{
+  color:#880e4f;
+  font-family: 'Kaushan Script', cursive;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 22px;
+}
+.navbar .nav > li  > a{
+  color :#263238;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}

@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import Layout from '../core/Layout';
 import axios from 'axios';
-
+import { MdError } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+import Loading from '../core/Loading';
 
 class Signup extends React.Component{
   //state
@@ -92,7 +94,7 @@ validateEmail = () => {
     const{success} = this.state;
     return(
       <div className="success">
-        {success ? <p className="alert alert-success">{success.message}</p> : ""}
+        {success ? <p className="alert alert-success"><FaCheck value={{className : 'react-icons'}}/> {success.message}</p> : ""}
       </div>
     )
   }
@@ -102,7 +104,7 @@ validateEmail = () => {
     const{error} = this.state;
     return(
       <div className="error">
-        {error ? <p className="alert alert-danger">{error.message}</p> : ""}
+        {error ? <p className="alert alert-danger"> <MdError value={{className : 'react-icons'}}/> {error.message}</p> : ""}
       </div>
     )
   }
@@ -127,7 +129,7 @@ validateEmail = () => {
              <input type="password" className="form-control" placeholder="Password" onChange={this.handlePassword} value={this.state.pasword}/>
              {passwordError && (<span className="help-block">{passwordError}</span>)}
           </div>
-          <button className="btn btn-success btn-block btn-sm">{loading ? "LOADING..." : "SUBMIT"}</button>
+          {loading ? <Loading /> : <button className="btn btn-success btn-block btn-sm">SUBMIT</button> }
        </form>
      )
   }

@@ -47,7 +47,7 @@ class AdminDashboard extends React.Component{
       <div className="section">
       <Layout/>
          <div className="jumbotron">
-            <h2>Admin dashboard</h2>
+            <h2 className="text-center">Admin dashboard</h2>
          </div>
          <div className="container">
            <div className="row">
