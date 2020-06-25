@@ -57,6 +57,7 @@ export const setCurrentUser = (decoded) => {
 // get profile
 export const getProfile = () => {
   return dispatch => {
+    dispatch(userLoading())
     axios.get('http://localhost:4000/api/user/profile')
      .then(res =>
        dispatch({

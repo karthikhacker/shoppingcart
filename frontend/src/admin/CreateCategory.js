@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { addCategory } from '../actions';
 import {Link} from 'react-router-dom';
+import Loading from '../core/Loading';
 
 class CreateCategory extends React.Component{
   state = {
@@ -29,13 +30,14 @@ class CreateCategory extends React.Component{
   }
   //form
   form = () => {
+    const {loading} = this.props.category;
     return(
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label>Category name</label>
           <input onChange={this.handleName} value={this.state.name} type="text" className="form-control" placeholder="Category name"/>
         </div>
-        <button className="btn btn-success btn-sm">{this.props.category.loading ? '...Loading' : 'Submit'}</button>
+        {loading ? <Loading /> : <button className="btn btn-success btn-sm">SUBMIT</button>}
       </form>
     )
   }

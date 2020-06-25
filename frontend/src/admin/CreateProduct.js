@@ -5,6 +5,7 @@ import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { createProduct } from '../actions';
+import Loading from '../core/Loading';
 
 class CreateProduct extends React.Component{
   //state
@@ -156,6 +157,7 @@ class CreateProduct extends React.Component{
   }
   //form
   form = () => {
+    const {loading} = this.props.product;
     return(
       <form onSubmit={this.handleSubmit}>
         <div className="row">
@@ -205,7 +207,7 @@ class CreateProduct extends React.Component{
                <label>Quantity</label>
                <input onChange={this.handleQuantity} value={this.state.quantity} type="text" className="form-control" placeholder="Quantity"/>
              </div>
-             <button className="btn btn-success btn-sm">{this.showLoading()}</button>
+             {loading ? <Loading /> : <button className="btn btn-success btn-sm">SUBMIT</button>}
           </div>
         </div>
       </form>

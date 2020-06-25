@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import {Link } from 'react-router-dom';
+import Loading from '../core/Loading';
 
 const UpdateProduct = ({match}) => {
   const [images,setImages] = useState([]);
@@ -35,6 +36,7 @@ const UpdateProduct = ({match}) => {
      .then(res => {
       //  console.log(res.data)
         setImages(res.data.images)
+        setLoading(false)
      })
      .catch(error => {
         setError(error)
@@ -55,7 +57,6 @@ const UpdateProduct = ({match}) => {
 
   //getProduct
   const getProduct = () => {
-    setLoading(true)
     axios.get(`http://localhost:4000/api/product/${match.params.id}`)
      .then(res => {
         //console.log(res.data.productImage)
@@ -116,7 +117,7 @@ const UpdateProduct = ({match}) => {
                <div className="col-lg-12">
                  <form onSubmit={handleSubmit}>
                    <div className="row">
-                     <div className="col-lg-4 well">
+                     <div className="col-lg-4">
                        <div className="form-group">
                          <label>IMAGES</label>
                          <input type="file" onChange={handleImage} className="form-control" multiple/>
@@ -127,7 +128,7 @@ const UpdateProduct = ({match}) => {
                              <img src={`http://localhost:4000/${img}`} alt="IMAGES" key={index} style={{ width : '50%', padding: '2px', display : "inline-block"}}/>
                            )) : null
                         }
-                      </div> : <p>Loading...</p>}
+                      </div> : <Loading />}
 
                      </div>
                      <div className="col-lg-4">
@@ -166,7 +167,7 @@ const UpdateProduct = ({match}) => {
                         </div>
                      </div>
                    </div>
-                   <p className="text-center"><button className=" btn-outline">{loading === false ? "SUBMIT" : "LOADING"}</button></p>
+                   {loading ? <Loading /> : <p className="text-center"><button className=" btn-outline">{loading === false ? "SUBMIT" : "LOADING"}</button></p> }
                  </form>
                </div>
              </div>

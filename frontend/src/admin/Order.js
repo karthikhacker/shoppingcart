@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import moment from 'moment';
+import Loading from '../core/Loading';
+
 
 const Order = () => {
   const [orders,setOrders] = useState([]);
@@ -43,7 +45,7 @@ const Order = () => {
     return(
       <div className="form-group">
          <label>{order.status}</label>
-         <select  onChange={e => handleChange(e,order._id)}>
+         <select  onChange={e => handleChange(e,order._id)} className="form-control">
            <option>STATUS</option>
            {statusValues.map((status,index) => (
               <option value={status} key={index}>{status}</option>
@@ -84,7 +86,7 @@ const Order = () => {
   const showLoading = (loading) => {
      return(
        <div className="text-center">
-         {loading ? <p>Loading ....</p> : null}
+         {loading ? <Loading /> : null}
        </div>
      )
   }
@@ -92,7 +94,7 @@ const Order = () => {
   //render orders
   const renderOrders = () => {
     return(
-       <div className="container table-responsive">
+       <div className="table-responsive">
              <table className="table">
                <thead>
                  <tr>
@@ -138,7 +140,7 @@ const Order = () => {
     )
   }
   return(
-    <div className="main">
+    <div className="section">
       <Layout />
        <div className="jumbotron">
           <h4 className="text-center">Total no of orders - {orders.length}</h4>

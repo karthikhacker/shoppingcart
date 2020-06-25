@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
+import Loading from '../core/Loading';
 
 
 const ManageProducts = () => {
@@ -45,7 +46,7 @@ const ManageProducts = () => {
   const showLoading = (loading) => {
      return(
        <div className="text-center">
-         {loading ? <p>Loading ....</p> : null}
+         {loading ? <Loading /> : null}
        </div>
      )
   }

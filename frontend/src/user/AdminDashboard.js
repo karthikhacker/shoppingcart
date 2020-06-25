@@ -3,6 +3,7 @@ import Layout from '../core/Layout';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../actions';
+import Loading from '../core/Loading';
 
 class AdminDashboard extends React.Component{
   componentDidMount(){
@@ -43,6 +44,7 @@ class AdminDashboard extends React.Component{
     )
   }
   render(){
+    const {loading} = this.props.profile;
     return(
       <div className="section">
       <Layout/>
@@ -55,7 +57,7 @@ class AdminDashboard extends React.Component{
                {this.linkPanel()}
              </div>
              <div className="col-sm-9">
-              {this.profilePanel()}
+              { loading ? <Loading /> :   this.profilePanel()}
              </div>
            </div>
          </div>
