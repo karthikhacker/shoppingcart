@@ -120,18 +120,24 @@ class Shop extends React.Component{
          <div className="container-fluid">
            <div className="row">
              <div className="col-sm-3">
-               <h3>Filter by categories</h3>
+                <div className="page-header">
+                 <h3>Filter by categories</h3>
+                </div>
                <Checkbox handleFilters={filters => this.handleFilters(filters,'category')} loading={this.state.loading}  categories={this.state.categories} />
-               <h3>Filter by Price</h3>
+               <div className="page-header">
+                <h3>Filter by price</h3>
+               </div>
                <RadioBox handleFilters={filters => this.handleFilters(filters,'price')}  prices={prices} />
              </div>
              <div className="col-lg-9">
-                <h3 className="text-center">Products</h3>
+                <div className="page-header">
+                  <h3 className="text-center">Products</h3>
+                </div>
                 {this.state.loading ? <Loading /> : <div className="row">
                   {
                     this.state.products.length > 0 ? this.state.products.slice(0,this.state.limit).map((product) => (
-                      <div className="col-sm-12 col-md-6 col-lg-3" key={product._id}>
-                       <Card product={product} key={product._id}/>
+                      <div className="col-xs-4 col-sm-4 col-md-4 col-lg-3" key={product._id}>
+                       <Card product={product} />
                       </div>
                     )) : <p className="text-center lead">No products</p>
                   }

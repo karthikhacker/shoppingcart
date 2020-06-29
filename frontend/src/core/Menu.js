@@ -1,4 +1,5 @@
 import React from 'react';
+import shopify from '../assests/shopify.png';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
@@ -15,7 +16,7 @@ import {FaUser,FaShoppingBag,FaPowerOff,FaUsers,FaCog,FaSignInAlt} from 'react-i
       <nav className="navbar navbar-default">
          <div className="container">
            <div className="navbar-header">
-             <Link to="/" className="navbar-brand">Shopify</Link>
+             <Link to="/" className="navbar-brand">SHOPIFY</Link>
            </div>
            {auth.isAuthenticated && auth.user.role === 'User' && (
               <ul className="nav navbar-nav navbar-right">

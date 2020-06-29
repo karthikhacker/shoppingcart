@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Layout from './Layout';
+import Loading from './Loading';
 
 const UpdateAddress = ({match,history}) => {
   const [loading,setLoading] = useState(false);
@@ -103,7 +104,7 @@ const UpdateAddress = ({match,history}) => {
        <div className="form-group">
          <input type="text" className="form-control" placeholder="MOBILE NUMBER" onChange={handleChange('mobileNumber')}  value={values.mobileNumber}/>
        </div>
-       <button className="btn btn-success">{loading ?  "LOADING..." : "SUBMIT"}</button>
+       {loading ? <Loading /> : <button className="btn btn-success">SUBMIT</button>}
       </form>
     )
   }

@@ -3,6 +3,7 @@ import {Link,Redirect} from 'react-router-dom';
 import Layout from './Layout';
 import axios from 'axios';
 import {getCart} from './cartHelper';
+import Loading from './Loading';
 
 const Checkout = ({history}) => {
   const [address, setAddress] = useState([]);
@@ -68,26 +69,26 @@ const Checkout = ({history}) => {
         { address.length ?  address.map((add) => (
             <div className="well" key={add._id}>
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-xs-2 col-lg-2">
                   <input type="radio" name={add.name} onChange={handleChange} value={add._id} />
                 </div>
-                <div className="col-lg-6">
-                   <p>{add.name}</p>
+                <div className="col-xs-6 col-lg-6">
+                   <p className="addressName">{add.name}</p>
                    <p>
-                     <span>{add.houseNo}</span> <span>{add.street}</span>
+                     <span>{add.houseNo}</span>, <span>{add.street}</span>,
                      <br />
-                     <span>{add.locality}</span> <span>{add.city}</span>
+                     <span>{add.locality}</span>, <span>{add.city}</span>,
                      <br />
                      <span>{add.state}</span> - <span>{add.pincode}</span>
                      <br />
-                     <span>{add.mobileNumber}</span>
+                     <span className="text-bold"><b>{add.mobileNumber}</b></span>
                    </p>
                 </div>
               </div>
               <hr />
               <div className="action-btn">
-                <button onClick={() => deleteAddress(add._id)} className="btn btn-danger btn-md">REMOVE</button>
-                 <Link to={`/address/edit/${add._id}`} className="btn btn-success btn-md">EDIT</Link>
+                 <button onClick={() => deleteAddress(add._id)} className="btn btn-danger btn-md">REMOVE</button>
+                 <Link to={`/address/edit/${add._id}`} className="btn btn-success btn-md pull-right">EDIT</Link>
               </div>
             </div>
          )) : null
@@ -100,7 +101,7 @@ const Checkout = ({history}) => {
    const showLoading = (loading) => {
       return(
         <div className="text-center">
-          {loading ? <p>Loading ....</p> : null}
+          {loading ? <Loading /> : null}
         </div>
       )
    }
@@ -109,18 +110,21 @@ const Checkout = ({history}) => {
       <Layout />
       <div className="container">
          <div className="row">
-            <div className="col-lg-4">
-               <p>
-                <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
-               </p>
+            <div className="col-xs-8 col-lg-4">
+              <div className="page-header">
+                <p>
+                 <Link to="/add/address" className="btn btn-success btn-block">ADD ADDRESS</Link>
+                </p>
+              </div>
                {address.length < 1 ? <p className="text-center">Add address for shipping</p> : <p className="text-muted">Select address for shipping</p>}
                {error ?  <p className="lead text-center">{error.message}</p> : null}
                {showLoading(loading)}
                {renderAddress()}
             </div>
-            <div className="col-lg-4">
-               Your bag total :  $ {cartTotal()}
-               <hr />
+            <div className="col-xs-4 col-lg-4">
+               <div className="page-header">
+                  <span className="price">Your bag total</span> :  <span className="dollar pull-right">&#36; {cartTotal()}</span>
+               </div>
                {selectedAddress ? <Link to={`/checkout/payment/${selectedAddress}`} className="btn btn-success btn-sm">Continue</Link> : null }
             </div>
          </div>

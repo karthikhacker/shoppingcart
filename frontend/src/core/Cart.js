@@ -44,28 +44,25 @@ const Cart = ({ auth }) => {
    const renderCartItem = (carts) => {
       return(
         <div className="row">
-          <div className="col-xs-4 col-lg-6">
+          <div className="col-xs-8 col-lg-6">
             { carts.length !== 0 ?  carts.map((cart,index) => (
                <div className="panel panel-default" key={cart._id}>
-                 <div className="panel-heading">
-                   <h3>{cart.name}</h3>
-                 </div>
                  <div className="panel-body">
                    <div className="row">
-                      <div className="col-xs-4 col-lg-3">
-                         <Link to={`/product/${cart._id}`}>
+                      <div className="col-xs-3 col-lg-3">
+                         <Link to={`/product/${cart._id}`} className="link">
                            <img src={`http://localhost:4000/${cart.productImage[0]}`} alt="Product image" style={{width : "100%"}}/>
                          </Link>
                       </div>
-                      <div className="col-xs-4">
-                        <p>{cart.description}</p>
+                      <div className="col-xs-6">
+                        <h5>{cart.name}</h5>
                         <p>
                            <label>Qty</label>
                            <input type="number" className="form-control" value={cart.quantity} onChange={handleChange(index)}/>
                         </p>
                       </div>
-                      <div className="col-xs-4">
-                        <span className="text-center">$ {cart.price}</span>
+                      <div className="col-xs-3">
+                        <span className="pull-right">$ {cart.price}</span>
                       </div>
                    </div>
                  </div>
@@ -76,10 +73,12 @@ const Cart = ({ auth }) => {
              )) : null
            }
           </div>
-          <div className="col-xs-2 col-lg-4">
+          <div className="col-xs-4 col-lg-6">
             {carts.length > 0 && (
-              <div>
-                <span>Bag total</span> <span className="pull-right">$ {cartTotal()}</span>
+              <div className="details">
+                <p>
+                  <span>Bag total</span> <span className="pull-right dollar">&#36; {cartTotal()}</span>
+                </p>
                  <hr />
                 <p>{auth.isAuthenticated  ? <Link className="btn btn-success" to="/checkout">Checkout</Link> : <Link className="btn btn-success" to="/signin">Login to checkout</Link>}</p>
              </div>
@@ -92,7 +91,7 @@ const Cart = ({ auth }) => {
       <div className="section">
         <Layout products={carts}/>
         <div className="container">
-         {carts.length > 0 ? <p>Your bag has {carts.length} items</p> : <p className="text-center">Your bag is empty</p>}
+         {carts.length > 0 ? <div className="page-header"><p>Your bag has ({carts.length}) items</p></div> : <p className="text-center">Your bag is empty</p>}
           {renderCartItem(carts)}
         </div>
       </div>

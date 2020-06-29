@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
+import Loading from '../core/Loading';
 
 const UpdateProfile = ({history}) => {
   const [loading,setLoading] = useState(false);
@@ -74,7 +75,7 @@ const UpdateProfile = ({history}) => {
            <input type="text" className="form-control" onChange={handleChange('location')} value={user.location || ''}/>
          </div>
          <Link className="btn btn-success btn-block btn-sm" to="/user/change/password">CHANGE PASSWORD</Link>
-         <button className="btn btn-primary btn-sm btn-block">{loading ? "Loading..." : "Submit"}</button>
+         {loading ? <Loading /> : <button className="btn btn-primary btn-sm btn-block">SUBMIT</button>}
        </form>
      )
    }

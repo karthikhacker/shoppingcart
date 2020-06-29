@@ -17,11 +17,9 @@ class AdminDashboard extends React.Component{
           <h4 className="text-center">Admin info</h4>
         </div>
         <div className="panel-body">
-          <ul className="list-group">
-            <li className="list-group-item">{profile.name}</li>
-            <li className="list-group-item">{profile.email}</li>
-            <li className="list-group-item">{profile.role === 'Admin' ? 'Admin' : 'User'}</li>
-          </ul>
+            <p>{profile.name}</p>
+            <p>{profile.email}</p>
+            <p>ROLE : {profile.role === 'Admin' ? 'Admin' : 'User'}</p>
         </div>
       </div>
     )
@@ -33,12 +31,10 @@ class AdminDashboard extends React.Component{
           <h4 className="text-center">Admin Links</h4>
         </div>
         <div className="panel-body">
-          <ul className="list-group">
-            <li className="list-group-item"><Link to="/create/category">Create category</Link></li>
-            <li className="list-group-item"><Link to="/create/product">Create product</Link></li>
-            <li className="list-group-item"><Link to="/admin/orders">Orders</Link></li>
-            <li className="list-group-item"><Link to="/admin/manage/products">Mange products</Link></li>
-          </ul>
+            <p><Link className="link" to="/create/category">Create category</Link></p>
+            <p><Link className="link" to="/create/product">Create product</Link></p>
+            <p><Link className="link" to="/admin/orders">Orders</Link></p>
+            <p><Link className="link" to="/admin/manage/products">Mange products</Link></p>
         </div>
       </div>
     )
@@ -53,10 +49,10 @@ class AdminDashboard extends React.Component{
          </div>
          <div className="container">
            <div className="row">
-             <div className="col-sm-3">
+             <div className="col-xs-6 col-sm-3 col-lg-3">
                {this.linkPanel()}
              </div>
-             <div className="col-sm-9">
+             <div className="col-xs-6 col-md-9 col-sm-9 col-lg-9">
               { loading ? <Loading /> :   this.profilePanel()}
              </div>
            </div>

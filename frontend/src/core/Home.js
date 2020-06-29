@@ -3,7 +3,7 @@ import Layout from './Layout';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card';
-import Footer from './Footer';
+//import Footer from './Footer';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Search from './Search';
@@ -75,21 +75,17 @@ class Home extends React.Component{
   //render latest productList
   renderLatestProducts = () => {
     return(
-          <div className="latest-products">
-            <div className="page-header">
-              <h5>LATEST PRODUCTS</h5>
+      <div className="row">
+        {
+          this.state.latestProducts.map((pro) => (
+            <div className="col-xs-4 col-lg-3" key={pro._id}>
+              <Card product={pro}/>
             </div>
-            {
-              this.state.latestProducts.map((pro) => (
-                <div className="col-lg-3" key={pro._id}>
-                  <Card product={pro}/>
-                </div>
-              ))
-            }
-          </div>
-
+          ))
+        }
+      </div>
     )
-  }
+}
 
   //showLoading
   showLoading = () => {
@@ -105,12 +101,12 @@ class Home extends React.Component{
            <div className="page-header">
             <div className="container">
                <Search updateSearch={this.handleUpdate}/>
-               <ul className="list-group">
+               <ul className="list-group search-list">
                {
                    this.state.visibleProducts.map((product) => (
-                    <Link to={`/product/${product._id}`} key={product._id} className="search-link">
+                    <Link to={`/product/${product._id}`} key={product._id} className="link">
                       <li className="list-group-item" >
-                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img"/> {product.name}
+                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img"/> <span className="product-name">{product.name}</span>
                       </li>
                     </Link>
                   ))
@@ -118,7 +114,7 @@ class Home extends React.Component{
                </ul>
             </div>
           </div>
-          <div className="container">
+          <div className="container carousel-container">
             <div className="row">
               <div className="col-lg-12">
                 <Carousel
@@ -141,11 +137,14 @@ class Home extends React.Component{
                  </Carousel>
               </div>
             </div>
-            <div className="row">
-              {this.showLoading()}
-            </div>
           </div>
-          <Footer />
+          <div className="container latest-products">
+            <div className="page-header">
+              <h4>LATEST PRODUCTS</h4>
+            </div>
+             {this.showLoading()}
+             {this.state.latestProducts.length > 0 ? null : <p className="text-centert">No products</p>}
+          </div>
        </div>
     )
   }

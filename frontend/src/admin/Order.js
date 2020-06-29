@@ -121,14 +121,14 @@ const Order = () => {
                       <td>
                         {order.address ?
                            <div>
-                             <span>{order.address.name}</span>
-                             <span>{order.address.houseNo}</span>
-                             <span>{order.address.street}</span>
-                             <span>{order.address.locality}</span>
-                             <span>{order.address.city}</span>
-                             <span>{order.address.state}</span>
-                             <span>{order.address.pincode}</span>
-                             <span>{order.address.mobileNumber}</span>
+                             <span>{order.address.name}</span>,
+                             <span>{order.address.houseNo}</span>,
+                             <span>{order.address.street}</span>,
+                             <span>{order.address.locality}</span>,
+                             <span>{order.address.city}</span>,
+                             <span>{order.address.state}</span>,
+                             <span>{order.address.pincode}</span>,
+                             <span>{order.address.mobileNumber}</span>.
                            </div>  : <span>No address</span>}
                       </td>
                     </tr>
@@ -143,11 +143,15 @@ const Order = () => {
     <div className="section">
       <Layout />
        <div className="jumbotron">
-          <h4 className="text-center">Total no of orders - {orders.length}</h4>
+          <h4 className="text-center">Total no of orders - <span className="label label-info">{orders.length}</span></h4>
        </div>
-       <div className="main" style={{ borderTop : "2px solid #eeeeee"}}>
-          {showLoading(loading)}
-          {orders.length > 0 ? renderOrders() : null}
+       <div className="main">
+         <div className="row">
+           <div className="col-xs-12 col-lg-12">
+             {showLoading(loading)}
+             {orders.length > 0 ? renderOrders() : null}
+           </div>
+         </div>
        </div>
     </div>
   )

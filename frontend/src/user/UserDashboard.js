@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../actions';
 import Layout from '../core/Layout';
+import Loading from '../core/Loading';
 
 class UserDashboard extends React.Component{
   componentDidMount(){
@@ -23,13 +24,11 @@ class UserDashboard extends React.Component{
           <h4 className="text-center">User info</h4>
         </div>
         <div className="panel-body">
-          <ul className="list-group">
-            <li className="list-group-item">{profile.name}</li>
-            <li className="list-group-item">{profile.email}</li>
-            <li className="list-group-item">{profile.about ?  <span>About :  {profile.about}</span> : 'Not added'}</li>
-            <li className="list-group-item">{profile.location ? <span>Location :  {profile.location}</span> : null}</li>
-            <li className="list-group-item">{profile.role === 'Admin' ? 'Admin' : 'User'}</li>
-          </ul>
+            <p>{profile.name}</p>
+            <p>{profile.email}</p>
+            <p>{profile.about ?  <span>About :  {profile.about}</span> : 'Not added'}</p>
+            <p>{profile.location ? <span>Location :  {profile.location}</span> : null}</p>
+            <p>{profile.role === 'Admin' ? 'Admin' : 'User'}</p>
         </div>
       </div>
     )
@@ -43,17 +42,16 @@ class UserDashboard extends React.Component{
           <h4 className="text-center">User Links</h4>
         </div>
         <div className="panel-body">
-          <ul className="list-group">
-            <li className="list-group-item"><Link to="/cart">cart</Link></li>
-            <li className="list-group-item"><Link to="/user/profile/update">update profile</Link></li>
-            <li className="list-group-item"><Link to="/user/order">Orders</Link></li>
-          </ul>
+            <p><Link className="link" to="/cart">cart</Link></p>
+            <p><Link className="link" to="/user/profile/update">update profile</Link></p>
+            <p><Link className="link" to="/user/order">Orders</Link></p>
         </div>
       </div>
     )
   }
   render(){
     //console.log(this.state.orders)
+    const {loading} = this.props.profile;
     return(
       <div className="section">
          <Layout />
@@ -66,7 +64,7 @@ class UserDashboard extends React.Component{
                {this.linkPanel()}
              </div>
              <div className="col-sm-9">
-              {this.profilePanel()}
+              {loading ? <Loading /> : this.profilePanel()}
              </div>
            </div>
          </div>

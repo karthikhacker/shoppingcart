@@ -1,4 +1,5 @@
 import React from 'react';
+import {BsSearch} from 'react-icons/bs'
 
 
 class Search extends React.Component{
@@ -17,7 +18,12 @@ class Search extends React.Component{
     return(
       <div className="row">
         <div className="col-sm-12">
-          <input type="text" onChange={this.handleChange} vale={this.state.searchTerms} className="form-control" placeholder="Search products"/>
+          <div className="input-group add-on">
+            <input type="text" onChange={this.handleChange} vale={this.state.searchTerms} className="form-control" placeholder="Search for products"/>
+              <div className="input-group-btn">
+                 <button className="btn btn-default"><BsSearch /></button>
+              </div>
+            </div>
         </div>
       </div>
     )

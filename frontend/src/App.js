@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Home from './core/Home';
+import Footer from './core/Footer';
 import Shop from './core/Shop';
 import Cart from './core/Cart';
 import Checkout from './core/Checkout';
@@ -76,6 +77,7 @@ class  App extends React.Component {
                <AdminRoute exact path="/admin/manage/products" component={ManageProducts}/>
                <AdminRoute exact path="/admin/product/update/:id" component={UpdateProduct}/>
              </Switch>
+             <Footer />
            </div>
         </Router>
       </Provider>

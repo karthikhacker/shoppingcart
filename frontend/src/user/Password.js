@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
+import Loading from '../core/Loading';
 
 const Password = () => {
   const [error,setError] = useState("");
@@ -59,7 +60,7 @@ const Password = () => {
         <div className="form-group">
           <input type="password" onChange={handleChange('confirmPassword')} className="form-control" placeholder="CONFIRM PASSWORD" value={values.confirmPassword}/>
         </div>
-        <button className="btn btn-primary btn-sm btn-block">{loading ? "Loading..." : "SUBMIT"}</button>
+        {loading ? <Loading /> : <button className="btn btn-primary btn-sm btn-block">SUBMIT</button>}
       </form>
     )
   }

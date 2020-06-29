@@ -6,6 +6,8 @@ import ImageCarousel from './ImageCarousel';
 import Card from './Card';
 import {addItem,totalItem} from './cartHelper';
 import Loading from './Loading';
+import { FaDollarSign,FaCartPlus } from "react-icons/fa";
+
 
 const Product = (props) => {
   const [product,setProduct] = useState({});
@@ -55,33 +57,37 @@ const Product = (props) => {
 
   const renderData = () => {
     return(
-      <div>
+      <div className="main">
         <div className="container">
            {shouldRedirect(redirect)}
            <div className="row">
-             <div className="col-sm-4 col-md-6 col-lg-4">
-                 {product && product.productImage &&  <ImageCarousel product={product}/> }
+             <div className="col-sm-4 col-md-6 col-lg-8">
+                 {product && product.productImage &&  product.productImage.map((img,index) => (
+                    <img src={`http://localhost:4000/${img}`} key={index} className="product-zoom-image"/>
+                 )) }
              </div>
              <div className="col-sm-4 col-md-6 col-lg-4">
                {product && product.name && <div className="page-header"><h2>{product.name}</h2></div>}
-               {product && product.price && <p className="lead">&#36; {product.price}</p>}
-               {product && product.category && <p>Category : {product.category.name}</p>}
-               {product && product.description && <p>{product.description}</p>}
-               {product && product.quantity > 0 ?  <p className="label label-primary">In stock</p> : <p className="label label-danger">Out of stock</p>}
+               {product && product.price && <div className="product-price"><span className="dollar">&#36;</span> <span className="price">{product.price}</span>  </div>}
+               {product && product.category && <div className="categoryName"><p>Category : {product.category.name}</p></div>}
+               {product && product.description && <div className="productDescription"><p>{product.description}</p></div>}
+               {product && product.quantity > 0 ? <div className="productStock"><p className="label label-primary">In stock</p></div> : <div className="productStock"><p className="label label-danger">Out of stock</p></div> }
                <br />
                <br />
-                { goToCart ?  <p className="lead"><Link to="/cart" className="btn btn-warning">GO TO BAG  &#8594;</Link></p> : <p><button onClick={addToCart}  className="btn btn-success">Add to cart</button></p>}
+                { goToCart ?  <div className="cart-btn"><p className="lead"><Link to="/cart" className="btn btn-warning btn-block btn-lg">GO TO BAG  &#8594;</Link></p></div> : <div className="cart-btn"><p><button onClick={addToCart}  className="btn btn-success btn-block btn-lg "><span className="react-icons"><FaCartPlus /></span>  ADD TO BAG</button></p></div>}
              </div>
            </div>
         </div>
-        <div className="container">
-          <h4>SIMILAR PRODUCT</h4>
+        <div className="container similarProduct">
+          <div className="page-header">
+            <h4>SIMILAR PRODUCT</h4>
+          </div>
           <div className="row">
             { similarProduct.length > 0 ?  similarProduct.map((product) => (
               <div className="col-sm-1 col-md-2 col-lg-4" key={product._id}>
                  <Card product={product}/>
               </div>
-            )) : <p className="text-center lead">NO SIMILAR PRODUCTS</p>}
+            )) : <div className="col-xs-4 col-md-4 col-lg-12"><p className="text-center">NO SIMILAR PRODUCTS</p></div>}
           </div>
         </div>
       </div>

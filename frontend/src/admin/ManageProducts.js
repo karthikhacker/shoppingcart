@@ -54,7 +54,7 @@ const ManageProducts = () => {
   // render products
   const renderProducts = () => {
     return(
-       <table className="table">
+       <table className="table table-responsive">
          <thead>
            <tr>
               <th>ID</th>
@@ -90,14 +90,14 @@ const ManageProducts = () => {
       <div className="jumbotron">
         <h2 className="text-center">Manage products</h2>
         <div className="page-header text-center">
-          <span>Total no of products {products.length}</span>
+          <span>Total no of products <span className="label label-primary">{products.length}</span></span>
         </div>
       </div>
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
              {showLoading(loading)}
-             {products.length > 0 ? renderProducts() : null}
+             {products.length > 0 ? renderProducts() : <p className="text-center">NO PRODUCTS</p>}
           </div>
         </div>
       </div>

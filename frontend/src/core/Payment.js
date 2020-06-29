@@ -103,10 +103,13 @@ const Payment = ({match}) => {
   return(
      <div className="section">
        <Layout products={carts}/>
+       <div className="jumbotron">
+         <h2 className="text-center">Payment</h2>
+       </div>
        {success ? <div className=" text-center alert alert-success"><p>Payment successfull <span className="pull-right">&#10004;</span></p></div> : null}
        <div className="container">
           <div className="row">
-             <div className="col-lg-6">
+             <div className="col-xs-8 col-lg-6">
              {paymentData.clientToken ? <div>
                <DropIn
                   options={{ authorization: paymentData.clientToken, paypal : { flow : "valut"} }}
@@ -115,8 +118,10 @@ const Payment = ({match}) => {
                 <button onClick={buy} className="btn btn-primary btn-block">Pay</button>
                </div>  : null}
              </div>
-             <div className="col-lg-4">
-                 bag total : <span>$ {cartTotal()}</span>
+             <div className=" col-xs-4 col-lg-4">
+                 <div className="cartTotal">
+                   <span className="text-bold">bag total</span> : <span className="price pull-right">&#36; {cartTotal()}</span>
+                 </div>
              </div>
           </div>
        </div>

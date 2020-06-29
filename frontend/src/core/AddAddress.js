@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Layout from './Layout';
 import  axios from 'axios';
 import {Link} from 'react-router-dom';
+import Loading from './Loading';
 
 const AddAddress = ({history}) => {
   const [loading,setLoading] = useState(false);
@@ -80,7 +81,7 @@ const AddAddress = ({history}) => {
        <div className="form-group">
          <input type="text" className="form-control" placeholder="MOBILE NUMBER" onChange={handleChange('mobileNumber')}  value={values.mobileNumber}/>
        </div>
-       <button className="btn btn-success">{loading ?  "LOADING..." : "SUBMIT"}</button>
+       {loading ? <Loading /> : <button className="btn btn-success">SUBMIT</button>}
       </form>
     )
   }

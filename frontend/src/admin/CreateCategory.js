@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../core/Layout';
 import {connect} from 'react-redux';
 import { addCategory } from '../actions';
 import {Link} from 'react-router-dom';
@@ -68,6 +69,7 @@ class CreateCategory extends React.Component{
     console.log(this.props.category)
     return(
       <div className="section">
+        <Layout />
         <div className="jumbotron">
           <h2 className="text-center">Add category</h2>
         </div>
