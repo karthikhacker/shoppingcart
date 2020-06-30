@@ -5,6 +5,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 const cors = require('cors');
 const chalk = require('chalk');
+const path = require("path");
 const app = express();
 require('dotenv').config();
 
@@ -39,6 +40,14 @@ app.use('/api',orderRoutes);
 app.use('/api',braintreeRoutes);
 
 app.use('/uploads',express.static('uploads'));
+
+//serve static files in production
+if(process.env.NODE_ENV === 'production'){
+   express.static(express.static('frontend/bulid'))
+   app.get("*",(req,res) => {
+      res.sendFile(path.resolve(__dirname,'frontend','build','index.html'))
+   })
+}
 
 //server
 const port = process.env.PORT;
