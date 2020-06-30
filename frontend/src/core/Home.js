@@ -106,7 +106,7 @@ class Home extends React.Component{
                    this.state.visibleProducts.map((product) => (
                     <Link to={`/product/${product._id}`} key={product._id} className="link">
                       <li className="list-group-item" >
-                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img"/> <span className="product-name">{product.name}</span>
+                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img" alt="image-search"/> <span className="product-name">{product.name}</span>
                       </li>
                     </Link>
                   ))
@@ -123,16 +123,16 @@ class Home extends React.Component{
                   autoPlay={true}
                 >
                      <div>
-                         <img src={image1} />
+                         <img src={image1}  alt="image1"/>
                      </div>
                      <div>
-                         <img src={image2} />
+                         <img src={image2} alt="image2"/>
                      </div>
                      <div>
-                         <img src={image3} />
+                         <img src={image3} alt="image3"/>
                      </div>
                      <div>
-                         <img src={image4} />
+                         <img src={image4} alt="image4"/>
                      </div>
                  </Carousel>
               </div>
