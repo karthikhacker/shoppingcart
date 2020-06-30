@@ -7,7 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "braintree-web": "^3.62.0",
     "braintree-web-drop-in-react": "^1.1.1",
     "classnames": "^2.2.6",
@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy" : "http://localhost:4000",
+  "proxy": "http://localhost:4000",
   "eslintConfig": {
     "extends": "react-app"
   },
