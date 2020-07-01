@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const config = require('../config/db');
 const jwt = require('jsonwebtoken');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
@@ -21,7 +22,7 @@ exports.signin = (req,res) => {
            name : user.name,
            email : user.email,
            role : user.role
-         },process.env.JWT_SECRET);
+         },config.JWT_SECRET);
          return res.status(200).json({ token : 'Bearer ' +  token, user })
        }
      }
@@ -32,7 +33,7 @@ exports.signin = (req,res) => {
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 exports.googleLogin = (req,res) => {
    const{idToken} = req.body
-   client.verifyIdToken({idToken,audience : process.env.GOOGLE_CLIENT_ID})
+   client.verifyIdToken({idToken,audience : config.GOOGLE_CLIENT_ID})
     .then(response => {
        console.log(response)
        const {email_verified,email,name} = response.payload;
@@ -46,7 +47,7 @@ exports.googleLogin = (req,res) => {
                  name : user.name,
                  email : user.email,
                  role : user.role
-               },process.env.JWT_SECRET);
+               },config.JWT_SECRET);
                return res.status(200).json({ token : 'Bearer ' +  token, user })
              }else{
                //save user to db
@@ -65,7 +66,7 @@ exports.googleLogin = (req,res) => {
                     name : user.name,
                     email : user.email,
                     role : user.role
-                  },process.env.JWT_SECRET);
+                  },config.JWT_SECRET);
                   return res.status(200).json({ token : 'Bearer ' +  token, user })
                })
              }

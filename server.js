@@ -7,8 +7,7 @@ const cors = require('cors');
 const chalk = require('chalk');
 const path = require("path");
 const app = express();
-require('dotenv').config();
-
+const config = require('./server/config/db');
 //Routes
  const userRoutes = require('./server/routes/user');
  const braintreeRoutes = require('./server/routes/braintree');
@@ -17,7 +16,7 @@ require('dotenv').config();
  const orderRoutes = require('./server/routes/order');
 
 //mongodb connection
-mongoose.connect(process.env.MONGOURI,{
+mongoose.connect(config.MONGOURI,{
   useNewUrlParser : true,
   useUnifiedTopology : true,
   useCreateIndex : true

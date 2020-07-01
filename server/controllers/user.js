@@ -1,11 +1,12 @@
 const User = require('../models/user');
+const config = require('../config/db');
 const Address = require('../models/address');
 const _ = require('lodash');
 const getErrorMessage = require('../helpers/errorHandler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 require('dotenv').config()
 
@@ -29,17 +30,17 @@ exports.signup =  (req,res) => {
          const hash = bcrypt.hashSync(password, salt);
          //const password = hash;
          //generate token
-         const token = jwt.sign({name,email,password,location},process.env.JWT_ACCOUNT_ACTIVATION,{expiresIn : '10m'})
+         const token = jwt.sign({name,email,password,location},config.JWT_ACCOUNT_ACTIVATION,{expiresIn : '10m'})
 
          // send activation email
          const emailData = {
-            from : process.env.EMAIL_FROM,
+            from : config.EMAIL_FROM,
             to : email,
             subject : 'Account activation link',
             text : 'Hi',
             html : `
                      <p>Please use following link to activate your account</p>
-                     <p>${process.env.CLIENT_URL}/auth/activate/${token}</p>
+                     <p>${config.CLIENT_URL}/auth/activate/${token}</p>
                      <hr />
                      <p>Thank you</p>
                    `
@@ -62,7 +63,7 @@ exports.signup =  (req,res) => {
 exports.accountActiation = (req,res) => {
   const {token} = req.body;
   if(token){
-    jwt.verify(token,process.env.JWT_ACCOUNT_ACTIVATION,function(err,decoded){
+    jwt.verify(token,config.JWT_ACCOUNT_ACTIVATION,function(err,decoded){
        if(err){
          return res.status(401).json({ message : 'Activation link expired. Signup again' })
        }
@@ -97,7 +98,7 @@ exports.forgotPassword = (req,res) => {
        return res.status(400).json({ message : "OOPS" })
      }
      //generate token
-     const token = jwt.sign({_id :  user._id,name : user.name},process.env.JWT_RESET_PASSWORD,{expiresIn : '10m'})
+     const token = jwt.sign({_id :  user._id,name : user.name},config.JWT_RESET_PASSWORD,{expiresIn : '10m'})
      const emailData = {
         from : process.env.EMAIL_FROM,
         to : email,
@@ -105,7 +106,7 @@ exports.forgotPassword = (req,res) => {
         text : 'Hi',
         html : `
                  <p>Please use following link to reset your password</p>
-                 <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+                 <p>${config.CLIENT_URL}/auth/password/reset/${token}</p>
                  <hr />
                  <p>Thank you</p>
                `
@@ -131,7 +132,7 @@ exports.resetPassword = (req,res) => {
   //
   const {resetPasswordLink,newPassword} = req.body;
   if(resetPasswordLink){
-    jwt.verify(resetPasswordLink,process.env.JWT_RESET_PASSWORD,(err,decoded) => {
+    jwt.verify(resetPasswordLink,config.JWT_RESET_PASSWORD,(err,decoded) => {
        if(err){
          return res.status(400).json({ message : "Expired link try again"})
        }
