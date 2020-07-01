@@ -122,7 +122,7 @@ const Payment = ({match}) => {
              <div className="col-xs-8 col-lg-6">
              {paymentData.clientToken ? <div>
                <DropIn
-                  options={{ authorization: paymentData.clientToken, paypal : { flow : "valut"} }}
+                  options={{ authorization: paymentData.clientToken }}
                   onInstance={(instance) => (paymentData.instance = instance)}
                 />
                 <button onClick={buy} className="btn btn-primary btn-block">Pay</button>
