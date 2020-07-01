@@ -24,7 +24,7 @@ const Forgot = () => {
        setError({ message : "Enter your email"})
        setLoading(false)
     }else{
-      axios.put('http://localhost:4000/api/forgot/password',{email})
+      axios.put('/api/forgot/password',{email})
        .then(res => {
           console.log(res.data)
           setSuccess(res.data)

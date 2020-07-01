@@ -31,7 +31,7 @@ const Checkout = ({history}) => {
   //get address
   const getAddress = () => {
     setLoading(true)
-    axios.get('http://localhost:4000/api/address')
+    axios.get('/api/address')
      .then(res => {
         console.log(res.data)
         setAddress(res.data)
@@ -52,7 +52,7 @@ const Checkout = ({history}) => {
 
    //deleteAddress
    const deleteAddress = (id) => {
-     axios.delete(`http://localhost:4000/api/address/${id}`)
+     axios.delete(`/api/address/${id}`)
        .then(res => {
          console.log(res.data)
          setAddress( address.filter(ad => ad._id !== id) )

@@ -31,7 +31,7 @@ class Home extends React.Component{
 
   //get products
   getProducts = () => {
-    axios.get('http://localhost:4000/api/products')
+    axios.get('/api/products')
      .then(res => {
        //console.log(res.data)
        this.setState({ products : res.data })
@@ -44,7 +44,7 @@ class Home extends React.Component{
   //latest products
    latestProducts = () => {
      this.setState({ loading : true})
-     axios.get('http://localhost:4000/api/products/latest')
+     axios.get('/api/products/latest')
       .then(res => {
          console.log(res.data)
          this.setState({ latestProducts : res.data, loading : false })

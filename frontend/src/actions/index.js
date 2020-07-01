@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 export const login = (userData) => {
   return dispatch => {
      dispatch(userLoading())
-     axios.post('http://localhost:4000/api/signin',userData)
+     axios.post('/api/signin',userData)
       .then(res => {
         const { token } = res.data
         // set token to localStorage
@@ -31,7 +31,7 @@ export const login = (userData) => {
 export const googleLogin = (data) => {
   return dispatch => {
     dispatch(userLoading())
-    axios.post('http://localhost:4000/api/google-login',data)
+    axios.post('/api/google-login',data)
     .then(res => {
       console.log(res.data)
       const { token } = res.data
@@ -58,7 +58,7 @@ export const setCurrentUser = (decoded) => {
 export const getProfile = () => {
   return dispatch => {
     dispatch(userLoading())
-    axios.get('http://localhost:4000/api/user/profile')
+    axios.get('/api/user/profile')
      .then(res =>
        dispatch({
         type : GET_PROFILE,
@@ -96,7 +96,7 @@ export const userLoading = () => {
 export const addCategory = (data) => {
   return dispatch => {
     dispatch(categoryLoading())
-    axios.post('http://localhost:4000/api/create/category',data)
+    axios.post('/api/create/category',data)
      .then(res => dispatch({
         type : CATEGORY_SUCCESS,
         payload : res.data
@@ -117,7 +117,7 @@ export const categoryLoading = () => {
 export const createProduct = (data) => {
   return dispatch => {
     dispatch(productLoading())
-    axios.post('http://localhost:4000/api/create/product',data)
+    axios.post('/api/create/product',data)
      .then(res => dispatch({
        type : ADD_PRODUCT,
        payload : res.data

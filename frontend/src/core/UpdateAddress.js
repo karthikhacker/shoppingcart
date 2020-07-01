@@ -28,7 +28,7 @@ const UpdateAddress = ({match,history}) => {
 
   //get address
   const getAddress = () => {
-    axios.get(`http://localhost:4000/api/address/${match.params.id}`)
+    axios.get(`/api/address/${match.params.id}`)
       .then(res => {
          console.log(res.data)
          setValues({
@@ -64,7 +64,7 @@ const UpdateAddress = ({match,history}) => {
      console.log(data);
 
     setLoading(true)
-    axios.put(`http://localhost:4000/api/address/edit/${match.params.id}`,data)
+    axios.put(`/api/address/edit/${match.params.id}`,data)
       .then(res => {
         console.log(res.data)
         history.push('/checkout')

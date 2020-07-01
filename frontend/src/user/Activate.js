@@ -28,7 +28,7 @@ const Activate = ({match,history}) => {
     let {token} = values;
     //console.log(token)
     setLoading(false);
-    axios.post('http://localhost:4000/api/account/activation',{token})
+    axios.post('/api/account/activation',{token})
     .then(res => {
         history.push("/signin")
     })

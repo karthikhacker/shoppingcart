@@ -17,7 +17,7 @@ const UserOrder = () => {
   //get user order
   const getOrders = () => {
     setLoading(true)
-    axios.get('http://localhost:4000/api/user/order')
+    axios.get('/api/user/order')
      .then(res => {
         console.log(res.data)
         setOrders(res.data)

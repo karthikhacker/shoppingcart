@@ -29,7 +29,7 @@ class CreateProduct extends React.Component{
       fd.append('file',e.target.files[key])
     }
     //axios
-    axios.post('http://localhost:4000/api/product/image',fd)
+    axios.post('/api/product/image',fd)
      .then(res => {
         console.log(res.data)
         this.setState({
@@ -44,7 +44,7 @@ class CreateProduct extends React.Component{
   }
   //get categories
   componentDidMount(){
-    axios.get('http://localhost:4000/api/categories')
+    axios.get('/api/categories')
      .then(res => {
        this.setState({ categories : res.data})
      })

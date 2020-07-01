@@ -40,7 +40,7 @@ const AddAddress = ({history}) => {
      }
      //console.log(data);
      setLoading(true)
-     axios.post('http://localhost:4000/api/add/address',data)
+     axios.post('/api/add/address',data)
      .then(res => {
         if(res.data){
           history.push("/checkout")

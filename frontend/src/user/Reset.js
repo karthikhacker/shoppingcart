@@ -45,7 +45,7 @@ const Reset = ({match}) => {
         newPassword,
         resetPasswordLink : token
       }
-      axios.put('http://localhost:4000/api/reset/password',data)
+      axios.put('/api/reset/password',data)
        .then(res => {
           console.log(res.data)
           setSuccess(res.data)

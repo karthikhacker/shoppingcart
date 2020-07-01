@@ -19,7 +19,7 @@ const UpdateProfile = ({history}) => {
   },[])
   //get profile
   const getProfile = () => {
-    axios.get('http://localhost:4000/api/user/profile')
+    axios.get('/api/user/profile')
     .then(res => {
        console.log(res.data)
        setUser({
@@ -47,7 +47,7 @@ const UpdateProfile = ({history}) => {
         name,email,about,location
      }
      setLoading(true)
-     axios.put('http://localhost:4000/api/profile/update',data)
+     axios.put('/api/profile/update',data)
       .then(res => {
          console.log(res.data)
          setLoading(false)

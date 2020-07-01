@@ -18,7 +18,7 @@ const ManageProducts = () => {
   // get all products
   const getProducts = () => {
     setLoading(true)
-     axios.get('http://localhost:4000/api/products')
+     axios.get('/api/products')
      .then(res => {
         console.log(res.data)
         setProducts(res.data)
@@ -32,7 +32,7 @@ const ManageProducts = () => {
 
   //Delete product
   const deleteProduct = (id) => {
-    axios.delete(`http://localhost:4000/api/product/${id}`)
+    axios.delete(`/api/product/${id}`)
       .then(res => {
          console.log(res.data)
          getProducts()

@@ -36,13 +36,13 @@ const Product = (props) => {
   //loadProduct
   const loadProduct = (productId) => {
     setLoading(true)
-    axios.get(`http://localhost:4000/api/product/${props.match.params.productId}`)
+    axios.get(`/api/product/${props.match.params.productId}`)
       .then(res => {
         //console.log(res.data)
         if(res.data){
           setProduct(res.data)
           //similar product
-          axios.get(`http://localhost:4000/api/products/related/${res.data._id}`)
+          axios.get(`/api/products/related/${res.data._id}`)
             .then(res => {
               //console.log(res.data)
               setSimilarProduct(res.data)

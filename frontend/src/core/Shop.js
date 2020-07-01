@@ -31,7 +31,7 @@ class Shop extends React.Component{
   //get categories
   getCategories = () => {
     this.setState({ loading : true })
-    axios.get('http://localhost:4000/api/categories')
+    axios.get('/api/categories')
      .then(res => {
        //console.log(res.data)
        this.setState({
@@ -52,7 +52,7 @@ class Shop extends React.Component{
 
   getProducts = (variables) => {
     //console.log(data)
-    axios.post('http://localhost:4000/api/products/by/search',variables)
+    axios.post('/api/products/by/search',variables)
      .then(res => {
        //console.log(res.data.size);
         this.setState({...this.state.products, products : res.data.product, size : res.data.size })

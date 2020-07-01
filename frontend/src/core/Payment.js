@@ -24,7 +24,7 @@ const Payment = ({match}) => {
   },[])
   //get token
   const getToken = () => {
-    axios.get('http://localhost:4000/api/braintree/token')
+    axios.get('/api/braintree/token')
      .then(res => {
         //console.log(res.data)
         setPaymentData({ clientToken : res.data.clientToken })
@@ -45,7 +45,7 @@ const Payment = ({match}) => {
   //create order
   const createOrder = (orderData) => {
     //console.log(orderData)
-     axios.post('http://localhost:4000/api/order/create',orderData)
+     axios.post('/api/order/create',orderData)
      .then(res => {
         console.log(res.data)
          if(res.data){
@@ -62,7 +62,7 @@ const Payment = ({match}) => {
 
   // processPayment
   const processPayment = (payload) => {
-    axios.post('http://localhost:4000/api/braintree/payment',payload)
+    axios.post('/api/braintree/payment',payload)
      .then(res => {
         //console.log(res.data)
         setSuccess(res.data.success)

@@ -20,7 +20,7 @@ const Order = () => {
   //update order status
   const updateOrderStatus = (data,orderId) => {
     console.log(data,orderId);
-     axios.put(`http://localhost:4000/api/order/${orderId}`,data)
+     axios.put(`/api/order/${orderId}`,data)
        .then(res => {
           if(res.data){
              getOrders()
@@ -57,7 +57,7 @@ const Order = () => {
 
   // get order status
    const getStatus = () => {
-     axios.get('http://localhost:4000/api/orders/status')
+     axios.get('/api/orders/status')
      .then(res => {
         console.log(res.data)
         setStatusValues(res.data)
@@ -70,7 +70,7 @@ const Order = () => {
   //get orders
   const getOrders = () => {
     setLoading(true)
-    axios.get('http://localhost:4000/api/orders')
+    axios.get('/api/orders')
     .then(res => {
        console.log(res.data)
        setOrders(res.data)

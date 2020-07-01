@@ -32,7 +32,7 @@ const UpdateProduct = ({match}) => {
       fd.append('file',e.target.files[key])
     }
     //axios
-    axios.post('http://localhost:4000/api/product/image',fd)
+    axios.post('/api/product/image',fd)
      .then(res => {
       //  console.log(res.data)
         setImages(res.data.images)
@@ -45,7 +45,7 @@ const UpdateProduct = ({match}) => {
 
   //get categories
   const getCategories = () => {
-    axios.get('http://localhost:4000/api/categories')
+    axios.get('/api/categories')
      .then(res => {
         //console.log(res.data)
         setCateories(res.data)
@@ -57,7 +57,7 @@ const UpdateProduct = ({match}) => {
 
   //getProduct
   const getProduct = () => {
-    axios.get(`http://localhost:4000/api/product/${match.params.id}`)
+    axios.get(`/api/product/${match.params.id}`)
      .then(res => {
         //console.log(res.data.productImage)
         setLoading(false)
@@ -94,7 +94,7 @@ const UpdateProduct = ({match}) => {
       }
     //  console.log(data);
     setLoading(true)
-    axios.put(`http://localhost:4000/api/product/${match.params.id}`,data)
+    axios.put(`/api/product/${match.params.id}`,data)
      .then(res => {
         console.log(res.data)
         setSuccess(true)

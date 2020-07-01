@@ -33,7 +33,7 @@ const Password = () => {
           newPassword : values.newPassword
         }
         setLoading(true)
-        axios.put('http://localhost:4000/api/user/change/password',data)
+        axios.put('/api/user/change/password',data)
          .then(res => {
             console.log(res.data)
             setSuccess(res.data)
