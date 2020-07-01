@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import Loading from '../core/Loading';
 
 const Activate = ({match,history}) => {
   const [values,setValues] = useState({
@@ -42,7 +43,7 @@ const Activate = ({match,history}) => {
     return(
       <div className="activate">
         <h5>Hi, <b>{values.name}</b> activate your account</h5>
-        <button onClick={handleClick} className="btn btn-success btn-sm">ACTIVATE ACCOUNT</button>
+        {loading ? <Loading /> : <button onClick={handleClick} className="btn btn-success btn-sm">ACTIVATE ACCOUNT</button>}
       </div>
     )
   }

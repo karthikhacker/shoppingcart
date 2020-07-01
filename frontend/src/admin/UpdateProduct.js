@@ -105,12 +105,22 @@ const UpdateProduct = ({match}) => {
      })
    }
 
+   //show Error
+   const showError = () => {
+     return(
+       <div>
+         {error ? <p className="text-danger text-center">{error.message}</p> : ""}
+       </div>
+     )
+   }
+
    return(
       <div className="section">
         <Layout />
           <div className="jumbotron">
              <h2 className="text-center">UPDATE PRODUCT</h2>
           </div>
+          {showError()}
           {success  ? <div className=" col-lg-6 col-lg-offset-3 alert alert-success">PRODUCT UPDATED <Link to="/admin/manage/products" className="pull-right"> BACK TO MANAGE PRODUCTS</Link></div> : null}
           <div className="container">
              <div className="row">

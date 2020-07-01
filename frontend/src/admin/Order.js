@@ -8,8 +8,7 @@ import Loading from '../core/Loading';
 const Order = () => {
   const [orders,setOrders] = useState([]);
   const [statusValues,setStatusValues] = useState([]);
-  const [currentValue,setCurrentValue] = useState("");
-  const [error,setError] = useState({});
+  const [error,setError] = useState("");
   const [loading,setLoading]  = useState(false);
 
   //useEffect
@@ -29,6 +28,7 @@ const Order = () => {
        })
        .catch(error => {
           console.log(error)
+          setError(error.response.data)
        })
   }
   //handleChange
@@ -91,6 +91,14 @@ const Order = () => {
      )
   }
 
+  const showError = () => {
+    return(
+      <div>
+       {error ? <p className="text-danger">{error.message}</p> : ""}
+      </div>
+    )
+  }
+
   //render orders
   const renderOrders = () => {
     return(
@@ -148,6 +156,7 @@ const Order = () => {
        <div className="main">
          <div className="row">
            <div className="col-xs-12 col-lg-12">
+             {showError()}
              {showLoading(loading)}
              {orders.length > 0 ? renderOrders() : null}
            </div>

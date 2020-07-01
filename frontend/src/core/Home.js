@@ -106,7 +106,7 @@ class Home extends React.Component{
                    this.state.visibleProducts.map((product) => (
                     <Link to={`/product/${product._id}`} key={product._id} className="link">
                       <li className="list-group-item" >
-                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img" alt="image-search"/> <span className="product-name">{product.name}</span>
+                       <img  src={`http://localhost:4000/${product.productImage[0]}`} className="search-img" alt="search"/> <span className="product-name">{product.name}</span>
                       </li>
                     </Link>
                   ))

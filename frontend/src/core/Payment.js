@@ -100,12 +100,22 @@ const Payment = ({match}) => {
      })
   }
 
+  const showError = () => {
+    return(
+      <div>
+        {error ? <p className="text-danger text-center">{error.message}</p> : ""}
+      </div>
+    )
+  }
+
+
   return(
      <div className="section">
        <Layout products={carts}/>
        <div className="jumbotron">
          <h2 className="text-center">Payment</h2>
        </div>
+       {showError()}
        {success ? <div className=" text-center alert alert-success"><p>Payment successfull <span className="pull-right">&#10004;</span></p></div> : null}
        <div className="container">
           <div className="row">

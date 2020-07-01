@@ -10,7 +10,7 @@ const ManageProducts = () => {
     //state
     const [products,setProducts] = useState([]);
     const [loading,setLoading] = useState(false);
-    const [error,setError] = useState({})
+    const [error,setError] = useState("")
    // use effect
    useEffect(() => {
       getProducts()
@@ -49,6 +49,14 @@ const ManageProducts = () => {
          {loading ? <Loading /> : null}
        </div>
      )
+  }
+
+  const showError = () => {
+    return(
+      <div>
+        {error ? <p className="text-danger text-center">{error.message}</p> : ""}
+      </div>
+    )
   }
 
   // render products
@@ -96,6 +104,7 @@ const ManageProducts = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
+             {showError()}
              {showLoading(loading)}
              {products.length > 0 ? renderProducts() : <p className="text-center">NO PRODUCTS</p>}
           </div>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import { MdError } from "react-icons/md";
