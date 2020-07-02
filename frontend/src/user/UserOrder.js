@@ -44,7 +44,7 @@ const UserOrder = () => {
                      <div className="main" key={pro._id}>
                         <div className="row">
                            <div className="col-lg-4 order-product-image">
-                             <img style={{width : "100%"}}  src={`http://localhost:4000/${pro.productImage[0]}`} alt="image"/>
+                             <img style={{width : "100%"}}  src={`${pro.productImage[0]}`} alt="image"/>
                            </div>
                            <div className="col-lg-6 order-history">
                              <h4 className="text-left">{pro.name}</h4>

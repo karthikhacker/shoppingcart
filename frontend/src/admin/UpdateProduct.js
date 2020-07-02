@@ -135,7 +135,7 @@ const UpdateProduct = ({match}) => {
                        {loading === false ?  <div className="image-preview">
                         {
                            images.length > 0 ?  images.map((img,index) => (
-                             <img src={`http://localhost:4000/${img}`} alt="IMAGES" key={index} style={{ width : '50%', padding: '2px', display : "inline-block"}}/>
+                             <img src={`${img}`} alt="IMAGES" key={index} style={{ width : '50%', padding: '2px', display : "inline-block"}}/>
                            )) : null
                         }
                       </div> : <Loading />}
