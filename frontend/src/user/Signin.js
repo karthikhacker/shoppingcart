@@ -78,7 +78,6 @@ class Signin extends React.Component{
      //  })
   }
 
-  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   //form
   form = () => {
@@ -96,7 +95,7 @@ class Signin extends React.Component{
          <Link to="/forgot/password" className="pull-right">Forgot password ?</Link>
          <hr />
          <GoogleLogin
-            clientId={`${GOOGLE_CLIENT_ID}`}
+            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
             render={renderProps => (
               <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn btn-default"> <i className="fa fa-google" aria-hidden="true"></i>
  LOGIN WITH GOOGLE <FcGoogle value={{className : 'react-icons'}}/></button>
