@@ -84,7 +84,7 @@ validateEmail = () => {
         this.setState({ success : res.data,loading : false, name : '',email : '',password : '',error : false})
      })
      .catch(error => {
-        this.setState({error : error.response.data, loading : false})
+        this.setState({error : error, loading : false})
      })
    }
  }
