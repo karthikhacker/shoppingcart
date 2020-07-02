@@ -1,37 +1,50 @@
 {
   "name": "ecommerce",
   "version": "1.0.0",
-  "description": "MERN ECOMMERCE",
+  "description": "Shopping cart using mern stack",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": "nodemon server.js ",
-    "frontend": "npm start --prefix  frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-  },
-  "author": "karthik",
-  "license": "ISC",
   "dependencies": {
-    "@sendgrid/mail": "^6.4.0",
+    "@sendgrid/mail": "^7.2.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "braintree": "^2.23.0",
-    "chalk": "^3.0.0",
+    "chalk": "^4.1.0",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "google-auth-library": "^6.0.1",
+    "google-auth-library": "^6.0.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.9.5",
+    "mongoose": "^5.9.21",
     "mongoose-unique-validator": "^2.0.3",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "stripe": "^8.55.0"
-  }
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server" : "nodemon server.js",
+    "frontend" : "npm start --prefix frontend",
+    "dev" : "concurrently \"npm run server\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karthikhacker/shoppingcart.git"
+  },
+  "keywords": [
+    "MERN",
+    "shopping",
+    "cart",
+    "braintree",
+    "payment"
+  ],
+  "author": "karthik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karthikhacker/shoppingcart/issues"
+  },
+  "homepage": "https://github.com/karthikhacker/shoppingcart#readme"
 }
