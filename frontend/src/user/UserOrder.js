@@ -33,9 +33,7 @@ const UserOrder = () => {
   const renderOrders = () => {
     return(
       <div className="col-lg-6">
-         <div className="page-header">
-            {orders.length > 0 ? <h4>No of orders {orders.length}</h4> : null}
-         </div>
+            {orders.length > 0 ? <div className="page-header"><h4>No of orders {orders.length}</h4></div> : null}
         {
            orders.map((order) => (
              <div className="well orderNo" key={order._id}>
