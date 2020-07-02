@@ -80,8 +80,6 @@ class Signin extends React.Component{
 
   //form
   form = () => {
-    const { loading } = this.props.auth;
-    console.log(loading)
     return(
       <form onSubmit={this.handleSubmit}>
          <div className="form-group">
@@ -92,7 +90,7 @@ class Signin extends React.Component{
             <label>Password</label>
             <input onChange={this.handlePassword} value={this.state.password} type="password" className="form-control" placeholder="Password"/>
          </div>
-         {loading ? <Loading /> : <button className="btn btn-success btn-sm">LOGIN</button> }
+         <button className="btn btn-success btn-sm">LOGIN</button>
          <Link to="/forgot/password" className="pull-right">Forgot password ?</Link>
          <hr />
          <GoogleLogin
