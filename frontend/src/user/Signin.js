@@ -81,6 +81,7 @@ class Signin extends React.Component{
   //form
   form = () => {
     const { loading } = this.props.auth;
+    console.log(loading)
     return(
       <form onSubmit={this.handleSubmit}>
          <div className="form-group">
@@ -125,7 +126,7 @@ class Signin extends React.Component{
     )
   }
   render(){
-
+    console.log(this.props.auth);
     return(
        <div className="section">
          <Layout />
