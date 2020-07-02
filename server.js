@@ -38,7 +38,8 @@ app.use('/api',productRoutes);
 app.use('/api',orderRoutes);
 app.use('/api',braintreeRoutes);
 
-app.use('/uploads',express.static('uploads'));
+const directory = path.join(__dirname, '/uploads');
+app.use('/uploads',express.static(directory));
 
 //serve static files in production
 if(process.env.NODE_ENV === 'production'){

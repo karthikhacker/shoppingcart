@@ -10,7 +10,7 @@ const ImageCarousel = ({product}) => {
       autoPlay={true}
      >
        {product.productImage.length > 0 ? product.productImage.map((img,index) => (
-         <img src={`${img}`} key={index} style={{ width : '100%'}} alt="carousel"/>
+         <img src={`http://localhost:4000/${img}`} key={index} style={{ width : '100%'}} alt="carousel"/>
        )) : null }
      </Carousel>
   )
