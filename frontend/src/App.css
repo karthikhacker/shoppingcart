@@ -277,8 +277,20 @@ label{
  ************************/
 .footer{
   text-align: center;
-  position: fixed;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color:#bdbdbd;
+  margin-top : 500px;
   left:0;
   right:0;
   bottom: 0;
+  word-spacing: 2px;
+}
+.footer-link{
+  color:#90caf9;
+  font-weight: 100;
+}
+.footer-link:hover{
+  text-decoration: none;
+  color:#90caf9;
 }
