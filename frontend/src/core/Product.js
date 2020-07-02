@@ -48,6 +48,9 @@ const Product = (props) => {
               setSimilarProduct(res.data)
               setLoading(false)
             })
+            .catch(error => {
+               setError(error)
+            })
         }
       })
   }
@@ -63,7 +66,7 @@ const Product = (props) => {
            <div className="row">
              <div className="col-sm-4 col-md-6 col-lg-8">
                  {product && product.productImage &&  product.productImage.map((img,index) => (
-                    <img src={`${img}`} key={index} className="product-zoom-image"/>
+                    <img src={`http://localhost:4000/${img}`} key={index} className="product-zoom-image"/>
                  )) }
              </div>
              <div className="col-sm-4 col-md-6 col-lg-4">

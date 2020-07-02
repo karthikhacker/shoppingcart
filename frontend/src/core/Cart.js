@@ -51,7 +51,7 @@ const Cart = ({ auth }) => {
                    <div className="row">
                       <div className="col-xs-3 col-lg-3">
                          <Link to={`/product/${cart._id}`} className="link">
-                           <img src={`${cart.productImage[0]}`} alt="Product image" style={{width : "100%"}}/>
+                           <img src={`http://localhost:4000/${cart.productImage[0]}`} alt="Product image" style={{width : "100%"}}/>
                          </Link>
                       </div>
                       <div className="col-xs-6">
