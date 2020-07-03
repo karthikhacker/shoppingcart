@@ -1,6 +1,7 @@
 # shoppingcart
 
 Shopping cart using MERN stack
+# Running mern app
 Running mern app 
 Clone this repo using git clone git@github.com:karthikhacker/shoppingcart.git 
 cd into cd shoppingcart
