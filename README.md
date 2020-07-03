@@ -11,3 +11,5 @@ Shopping cart using MERN stack
 * Then run cd ..
 * Back to main app directory
 * Then run npm run dev
+# Live Demo
+* https://shopify-mern.herokuapp.com
