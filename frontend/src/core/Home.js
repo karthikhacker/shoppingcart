@@ -78,7 +78,7 @@ class Home extends React.Component{
       <div className="row">
         {
           this.state.latestProducts.map((pro) => (
-            <div className="col-xs-4 col-lg-3" key={pro._id}>
+            <div className="col-xs-6 col-md-6 col-lg-3" key={pro._id}>
               <Card product={pro}/>
             </div>
           ))

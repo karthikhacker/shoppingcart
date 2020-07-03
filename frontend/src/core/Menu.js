@@ -21,25 +21,25 @@ import {FaUser,FaShoppingBag,FaPowerOff,FaUsers,FaCog,FaSignInAlt} from 'react-i
            {auth.isAuthenticated && auth.user.role === 'User' && (
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/user/dashboard"><FaCog value={{className : 'react-icons'}}/> Dashboard </Link></li>
-                <li><a style={{cursor : 'pointer'}} onClick={onLogout}> <FaPowerOff value={{className : 'react-icons'}}/> Logout</a></li>
+                <li><a style={{cursor : 'pointer'}} onClick={onLogout}> <span className="react-icons"><FaPowerOff /></span> Logout</a></li>
               </ul>
            )}
            {auth.isAuthenticated && auth.user.role === 'Admin' && (
              <ul className="nav navbar-nav navbar-right">
-               <li><Link to="/admin/dashboard"><FaCog value={{className : 'react-icons'}}/> Admin Dashboard</Link></li>
-               <li><a style={{cursor : 'pointer'}} onClick={onLogout}><FaPowerOff value={{className : 'react-icons'}}/> Logout</a></li>
+               <li><Link to="/admin/dashboard"><span className="react-icons"><FaCog /></span> Admin Dashboard</Link></li>
+               <li><a style={{cursor : 'pointer'}} onClick={onLogout}> <span className="react-icons"><FaPowerOff /></span> Logout</a></li>
              </ul>
            )}
 
            {!auth.isAuthenticated && (
              <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/signup"><FaUsers value={{className : 'react-icons'}}/> Signup</Link></li>
-              <li><Link to="/signin"><FaSignInAlt value={{className : 'react-icons'}}/> Signin</Link></li>
+              <li><Link to="/signup"><span className="react-icons"><FaUsers /></span> Signup</Link></li>
+              <li><Link to="/signin"><span className="react-icons"><FaSignInAlt /></span> Signin</Link></li>
              </ul>
            )}
            <ul className="nav navbar-nav navbar-right">
              <li><Link to="/shop">Shop</Link></li>
-             <li><Link to="/cart"><FaShoppingBag value={{className : 'react-icons'}}/> Bag<sup><small className="badge">{totalItem(products)}</small></sup></Link></li>
+             <li><Link to="/cart"><span className="react-icons"><FaShoppingBag /></span> Bag<sup><small className="badge">{totalItem(products)}</small></sup></Link></li>
            </ul>
          </div>
       </nav>

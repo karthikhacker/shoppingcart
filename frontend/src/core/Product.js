@@ -64,20 +64,20 @@ const Product = (props) => {
         <div className="container">
            {shouldRedirect(redirect)}
            <div className="row">
-             <div className="col-sm-4 col-md-6 col-lg-8">
+             <div className=" col-xs-8 col-sm-4 col-md-6 col-lg-8 side-bar">
                  {product && product.productImage &&  product.productImage.map((img,index) => (
                     <img src={`http://localhost:4000/${img}`} key={index} className="product-zoom-image"/>
                  )) }
              </div>
-             <div className="col-sm-4 col-md-6 col-lg-4">
-               {product && product.name && <div className="page-header"><h2>{product.name}</h2></div>}
+             <div className="col-xs-4 col-sm-4 col-md-6 col-lg-4 main-content">
+               {product && product.name && <h3>{product.name}</h3>}
                {product && product.price && <div className="product-price"><span className="dollar">&#36;</span> <span className="price">{product.price}</span>  </div>}
                {product && product.category && <div className="categoryName"><p>Category : {product.category.name}</p></div>}
                {product && product.description && <div className="productDescription"><p>{product.description}</p></div>}
                {product && product.quantity > 0 ? <div className="productStock"><p className="label label-primary">In stock</p></div> : <div className="productStock"><p className="label label-danger">Out of stock</p></div> }
                <br />
                <br />
-                { goToCart ?  <div className="cart-btn"><p className="lead"><Link to="/cart" className="btn btn-warning btn-block btn-lg">GO TO BAG  &#8594;</Link></p></div> : <div className="cart-btn"><p><button onClick={addToCart}  className="btn btn-success btn-block btn-lg "><span className="react-icons"><FaCartPlus /></span>  ADD TO BAG</button></p></div>}
+                { goToCart ?  <div className="cart-btn"><p className="lead"><Link to="/cart" className="btn btn-warning btn-block btn-md">GO TO BAG  &#8594;</Link></p></div> : <div className="cart-btn"><p><button onClick={addToCart}  className="btn btn-success btn-block btn-md "><span className="react-icons"><FaCartPlus /></span>  ADD TO BAG</button></p></div>}
              </div>
            </div>
         </div>
@@ -87,7 +87,7 @@ const Product = (props) => {
           </div>
           <div className="row">
             { similarProduct.length > 0 ?  similarProduct.map((product) => (
-              <div className="col-sm-1 col-md-2 col-lg-4" key={product._id}>
+              <div className=" col-xs-4 col-sm-1 col-md-2 col-lg-4" key={product._id}>
                  <Card product={product}/>
               </div>
             )) : <div className="col-xs-4 col-md-4 col-lg-12"><p className="text-center">NO SIMILAR PRODUCTS</p></div>}

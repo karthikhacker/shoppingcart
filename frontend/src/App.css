@@ -6,10 +6,12 @@ body{
   margin:0;
   padding:0;
 }
+
 h1,h2,h3,h4,h5{
   font-family: 'Roboto', sans-serif;
   letter-spacing: 1px;
   color:#bdbdbd;
+  text-transform: uppercase;
 }
 .section{
   margin:0;
@@ -23,11 +25,6 @@ p{
 }
 .btn:focus, .btn:active{
   outline: none !important;
-}
-.react-icons{
-  color:#212121;
-  font-size: 18px;
-  font-weight: 700;
 }
 .price{
   color:#212121;
@@ -97,6 +94,15 @@ label{
   text-transform: capitalize;
   letter-spacing: normal;
 }
+.panel-footer{
+  background: #FFF !important;
+}
+.react-icons{
+  font-size: 11px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color:#212121;
+}
 /************
  Navbar
  ************/
@@ -141,6 +147,7 @@ label{
   color: #FFF;
 }
 
+
 /*************************
    Search bar
  *************************/
@@ -167,10 +174,30 @@ label{
 }
 
 /*************************
+  SHOP PAGE
+ *************************/
+ .side-bar h5{
+   padding:0 5px;
+ }
+ .main-content{
+   padding:0 5px;
+ }
+/*************************
    Product page
  *************************/
 .main{
-  margin: 20px;
+  padding-top: 55px;
+  margin:0;
+}
+.side-bar{
+  padding:0 5px;
+}
+.main-content{
+  padding:0 5px;
+}
+.main-content h3{
+  padding:0px;
+  margin:0px;
 }
 .product-zoom-image{
   width: 50%;
@@ -197,8 +224,8 @@ label{
 }
 .cart-btn .react-icons{
   color:#FFF;
-  padding-right: 15px;
-  margin-top:10px;
+  font-size: 13px;
+  padding: 0 10px;
 }
 /**************************
    SIMILAR PRODUCT

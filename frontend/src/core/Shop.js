@@ -117,26 +117,25 @@ class Shop extends React.Component{
     return(
        <div className="section">
          <Layout />
-         <div className="container-fluid">
+         <div className="container">
            <div className="row">
-             <div className="col-sm-3">
-                <div className="page-header">
-                 <h3>Filter by categories</h3>
-                </div>
+             <div className="col-xs-12 col-md-12 col-lg-12">
+                {this.state.products.length > 0 ? <h5> No of products - {this.state.products.length}</h5> : null}
+                <hr />
+             </div>
+           </div>
+           <div className="row">
+             <div className=" col-xs-4 col-md-6  col-sm-3 col-lg-3 side-bar">
+                 <h5>Filter by categories</h5>
                <Checkbox handleFilters={filters => this.handleFilters(filters,'category')} loading={this.state.loading}  categories={this.state.categories} />
-               <div className="page-header">
-                <h3>Filter by price</h3>
-               </div>
+                <h5>Filter by price</h5>
                <RadioBox handleFilters={filters => this.handleFilters(filters,'price')}  prices={prices} />
              </div>
-             <div className="col-lg-9">
-                <div className="page-header">
-                  <h3 className="text-center">Products</h3>
-                </div>
+             <div className="col-xs-8 col-md-6 col-lg-9 main-content">
                 {this.state.loading ? <Loading /> : <div className="row">
                   {
                     this.state.products.length > 0 ? this.state.products.slice(0,this.state.limit).map((product) => (
-                      <div className="col-xs-4 col-sm-4 col-md-4 col-lg-3" key={product._id}>
+                      <div className="col-xs-6 col-sm-4 col-md-4 col-lg-3" key={product._id}>
                        <Card product={product} />
                       </div>
                     )) : <p className="text-center lead">No products</p>
